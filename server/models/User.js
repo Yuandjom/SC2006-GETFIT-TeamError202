@@ -25,6 +25,22 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 5,
     },
+    gender: {
+      type: String,
+      required: [true, "Please select your gender"],
+    },
+    height: {
+      type: Number,
+      required: [true, "Please enter your height in centimeters"],
+    },
+    weight: {
+      type: Number,
+      required: [true, "Please enter your weight in kilograms"],
+    },
+    fitnessPlan: {
+      type: String,
+      required: [true, "Please select your fitness plan"],
+    },
     picturePath: {
       type: String,
       default: "",
@@ -34,9 +50,6 @@ const UserSchema = new mongoose.Schema(
       default: [],
     },
     location: String,
-    occupation: String,
-    viewedProfile: Number,
-    impressions: Number,
   },
   { timestamps: true }
 );
