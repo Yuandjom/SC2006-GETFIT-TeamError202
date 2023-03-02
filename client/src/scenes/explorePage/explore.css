@@ -1,0 +1,69 @@
+.explore-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two columns with equal width */
+  grid-template-rows: auto 1fr; /* first row auto-sized, second row fills remaining space */
+  grid-gap: 20px; /* gap between grid items */
+
+  /* additional styling */
+  padding: 20px;
+}
+
+.enter-details {
+  grid-row: 1 / span 1; /* first row */
+  grid-column: 1 / span 1; /* first column */
+}
+
+.map {
+  grid-row: 1 / span 2; /* span two rows */
+  grid-column: 2 / span 1; /* second column */
+}
+
+.location-details {
+  grid-row: 2 / span 1; /* second row */
+  grid-column: 1 / span 1; /* first column */
+  margin-top: 100px;
+}
+
+.location-details .details-container {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.location-details h3 {
+  margin-top: 0;
+}
+
+.enter-details form {
+  display: flex;
+  flex-direction: column;
+}
+
+.enter-details label {
+  margin-bottom: 5px;
+}
+
+.enter-details input,
+.enter-details select {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.enter-details button[type="submit"] {
+  background-color: #fdc0c0;
+  color: rgb(1, 1, 1);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.enter-details button[type="submit"]:hover {
+  background-color: #f77e7e;
+}
+
+.enter-details h2 {
+  margin-top: 0;
+}
