@@ -3,10 +3,14 @@ import {
   Box,
   Button,
   TextField,
+  FormLabel,
   useMediaQuery,
   Typography,
   useTheme,
 } from "@mui/material";
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -22,7 +26,11 @@ const registerSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
   password: yup.string().required("required"),
   location: yup.string().required("required"),
-  occupation: yup.string().required("required"),
+  age: yup.string().required("required"),
+  gender: yup.string().required("required"),
+  height: yup.string().required("required"),
+  weight: yup.string().required("required"),
+  fitnessPlan: yup.string().required("required"),
   picture: yup.string().required("required"),
 });
 
@@ -37,8 +45,11 @@ const initialValuesRegister = {
   email: "",
   password: "",
   location: "",
-  occupation: "",
   picture: "",
+  age: "", 
+  height: "", 
+  weight: "", 
+  fitnessPlan: ""
 };
 
 const initialValuesLogin = {
@@ -152,6 +163,75 @@ const Form = () => {
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
+                  label="Height"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.height}
+                  name="height"
+                  error={
+                    Boolean(touched.height) && Boolean(errors.height)
+                  }
+                  helperText={touched.height && errors.height}
+                  sx={{ gridColumn: "span 2" }}
+                  type="number"
+                  InputProps={{
+                    inputProps: { 
+                        min: 0
+                    }
+                  }}
+                />
+                <TextField
+                  label="Weight"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.weight}
+                  name="weight"
+                  type="number"
+                  error={Boolean(touched.weight) && Boolean(errors.weight)}
+                  helperText={touched.weight && errors.weight}
+                  sx={{ gridColumn: "span 2" }}
+                  InputProps={{
+                    inputProps: { 
+                        min: 0
+                    }
+                  }}
+                />
+                <TextField
+                  label="Age"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.age}
+                  name="age"
+                  type="number"
+                  error={Boolean(touched.age) && Boolean(errors.age)}
+                  helperText={touched.age && errors.age}
+                  sx={{ gridColumn: "span 2" }}
+                  InputProps={{
+                    inputProps: { 
+                        min: 0
+                    }
+                  }}
+                />
+            <FormControl required sx={{ gridColumn: "span 2" }}
+            error={Boolean(touched.gender) && Boolean(errors.gender)} helperText={touched.gender && errors.gender}        
+                  >
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    name="gender"
+                    value={values.gender}
+                    margin='normal'
+                    required
+                    onChange={handleChange}
+                    error={Boolean(touched.age) && Boolean(errors.age)}
+                    helperText={touched.age && errors.age}
+                    
+                  >
+                    <MenuItem value={"Male"}>Male</MenuItem>
+                    <MenuItem value={'Female'}>Female</MenuItem>
+                  </Select>
+                </FormControl>
+                <TextField
                   label="Location"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -159,18 +239,6 @@ const Form = () => {
                   name="location"
                   error={Boolean(touched.location) && Boolean(errors.location)}
                   helperText={touched.location && errors.location}
-                  sx={{ gridColumn: "span 4" }}
-                />
-                <TextField
-                  label="Occupation"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.occupation}
-                  name="occupation"
-                  error={
-                    Boolean(touched.occupation) && Boolean(errors.occupation)
-                  }
-                  helperText={touched.occupation && errors.occupation}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <Box
@@ -206,6 +274,24 @@ const Form = () => {
                     )}
                   </Dropzone>
                 </Box>
+                <FormControl required sx={{ gridColumn: "span 4" }}
+            error={Boolean(touched.fitnessPlan) && Boolean(errors.fitnessPlan)} helperText={touched.fitnessPlan && errors.fitnessPlan}        
+                  >
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    name="fitnessPlan"
+                    value={values.fitnessPlan}
+                    margin='normal'
+                    required
+                    onChange={handleChange}
+                    error={Boolean(touched.fitnessPlan) && Boolean(errors.fitnessPlan)}
+                    helperText={touched.fitnessPlan && errors.fitnessPlan}
+                  >
+                    <MenuItem value={"LowFat"}>LowFat</MenuItem>
+                    <MenuItem value={'Muscle'}>Muscle</MenuItem>
+                  </Select>
+                </FormControl>
               </>
             )}
 
@@ -230,6 +316,7 @@ const Form = () => {
               helperText={touched.password && errors.password}
               sx={{ gridColumn: "span 4" }}
             />
+
           </Box>
 
           {/* BUTTONS */}
