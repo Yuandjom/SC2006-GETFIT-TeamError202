@@ -3,6 +3,7 @@ import "../../index.css";
 import FoodSection from "./FoodSection";
 import ExerciseSection from './ExerciseSection';
 import Navbar from "scenes/navbar";
+import FoodApi from "./FoodApi";
 
 function Tracker() {
   return (
@@ -47,7 +48,9 @@ function Tracker() {
         <ExerciseSection 
           name="Exercise"/>
       </div>
-
+      <div>
+        <FoodApi />
+      </div>
     </div>
   )
 }
