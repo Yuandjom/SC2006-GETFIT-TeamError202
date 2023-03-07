@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+    <head> Search Nearby Gym
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDZjux3Ro6hPFyqTxKdG7Y6_fkOpeKEFY&libraries=places"></script>
+    </head>
+
+    <script>
+        var map;
+        var service;
+        var info;
+
+        function initialize(){
+            var param = new google.maps.LatLng(1.3521,103.8198)
+
+            map = new google.maps.Map(document.getElementById('map'),{
+                center: param,
+                zoom: 15
+            })
+
+            var input = document.getElementById('searchBox');
+
+            let autocomplete = new google.maps.places.Autocomplete(input)
+            autocomplete.bindTo('bounds', map)
+
+            let marker = new google.maps.Marker({
+                map: map
+            })
+
+            google.maps.event.addListener(autocomplete, 'place_changed', () => {
+                let place = autocomplete.getPlace()
+                console.log(place)
+                // console.log(place.formatted_address)
+
+                if(place.geometry.viewport){
+                    map.fitBounds(place.geometry.viewport)
+                }
+                else{
+                    map.setCenter(place.geometry.location)
+                    map.setZoom(20)
+                }
+                marker.setPosition(place.geometry.location)
+                marker.setVisible(true)
+
+                let req = {
+                    location: place.geometry.location,
+                    // adjust search radius
+                    radius: '500',
+                    // search for amenities (check google for valid places)
+                    type: ['gym']
+                }
+
+                service = new google.maps.places.PlacesService(map)
+                service.nearbySearch(req, callback)
+            })
+        }
+
+        function callback(results, status){
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+                var place = results[i];
+                createMarker(results[i]);
+                }
+            }
+        }
+
+
+        function createMarker(place) {
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+ 
+            google.maps.event.addListener(marker, 'click', function () {
+                alert(place.name);
+                //alert(place.formatted_address); 
+                // maybe can add in other features to display?
+                
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize)
+
+    </script>
+
+    <body>
+        <input id="searchBox" type="text" size="60">
+        <div id="map" style="height:500px;"></div>
+    </body>
+
+
+</html>
