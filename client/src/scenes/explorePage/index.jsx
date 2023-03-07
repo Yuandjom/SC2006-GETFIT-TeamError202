@@ -2,8 +2,31 @@ import React from 'react'
 import Navbar from 'scenes/navbar'
 import "./explore.css";
 import map from "./map.png"
+import {
+    useJsApiLoader,
+    GoogleMap,
+    Marker,
+    Autocomplete,
+    DirectionsRenderer,
+  } from '@react-google-maps/api'
+import { useRef, useState } from 'react'
+import { Box, Typography } from '@mui/material';
 
 function ExplorePage() {
+    const { isLoaded } = useJsApiLoader({
+        //idk why i use REACT_APP never work
+        googleMapsApiKey: "AIzaSyBDZjux3Ro6hPFyqTxKdG7Y6_fkOpeKEFY",
+        libraries: ['places'],
+      })
+    const center = {lat: 1.3521, lng: 103.8198}
+    const [map, setMap] = useState(/** @type google.maps.Map */ (null))
+    
+    if (!isLoaded) {
+        return (<Typography>
+            Not loaded
+        </Typography>)
+    }
+    
   return (
     <div>
         <Navbar />
@@ -25,7 +48,15 @@ function ExplorePage() {
                 </form>
             </div>
             {/* "https://api.mapbox.com/styles/v1/kavita99/streets-v11/static/-122.4194,37.7749,12/500x500?access_token={pk.eyJ1Ijoia2F2aXRhOTkiLCJhIjoiY2xlbGJobXBtMHRwazNwcGRvb2gyczdoNiJ9.9m7kO12Jp60Cjf7Rkushow}" */}
-            <img src= {map} className='map' alt="Map" />
+            {/**some time can work */}
+            <GoogleMap
+                    center={center}
+                    zoom={15}
+                    mapContainerStyle={{ width: '100%', height: '100%' }}
+                    
+                >
+
+            </GoogleMap>
 
             <div className= 'location-details'>
                 <h2>Jurong West ActiveSG Gym</h2>

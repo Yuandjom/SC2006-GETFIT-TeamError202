@@ -26,10 +26,7 @@ function App() {
               path="/home"
               element={isAuth ? <HomePage /> : <Navigate to="/" />}
             />
-            <Route
-              path="/explore"
-              element={isAuth ? <ExplorePage /> : <Navigate to="/" />}
-            />
+            <Route path="/explore" element={<ExplorePage />} />
             <Route
               path="/tracker"
               element={isAuth ? <Tracker /> : <Navigate to="/" />}
