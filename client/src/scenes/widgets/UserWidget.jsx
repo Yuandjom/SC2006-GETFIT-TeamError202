@@ -56,7 +56,7 @@ const UserWidget = ({ userId, picturePath }) => {
       <FlexBetween
         gap="0.5rem"
         pb="1.1rem"
-        onClick={() => navigate(`/profile/${userId}`)}
+        
       >
         <FlexBetween gap="1rem">
           <UserImage image={picturePath} />
@@ -71,13 +71,26 @@ const UserWidget = ({ userId, picturePath }) => {
                   cursor: "pointer",
                 },
               }}
+            onClick={() => navigate(`/profile/${userId}`)}
             >
               {firstName} {lastName}
             </Typography>
             <Typography color={medium}>{friends.length} friends</Typography>
           </Box>
         </FlexBetween>
-        <ManageAccountsOutlined />
+        <FlexBetween onClick = {() => navigate(`/updateUser`)}>
+        <ManageAccountsOutlined 
+        >
+        </ManageAccountsOutlined>
+        <Typography color={medium}               
+              sx={{
+                "&:hover": {
+                  color: palette.primary.light,
+                  cursor: "pointer",
+                },
+              }} >Edit profile</Typography>
+        </FlexBetween>
+
       </FlexBetween>
 
       <Divider />
