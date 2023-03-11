@@ -20,6 +20,10 @@ const UserSchema = new mongoose.Schema(
       max: 50,
       unique: true,
     },
+    age: {
+      type: Number,
+      required: [true, "Please enter your age"],
+    },
     password: {
       type: String,
       required: true,

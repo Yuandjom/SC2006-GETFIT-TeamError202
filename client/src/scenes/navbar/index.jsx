@@ -31,6 +31,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  const { _id, picturePath } = useSelector((state) => state.user);
 
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
@@ -76,16 +77,20 @@ const Navbar = () => {
       {/* DESKTOP NAV */}
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
-          <IconButton onClick={() => dispatch(setMode())}>
+          {/* 
+          This is to disable the dark and light mode icon
+
+          <IconButton onClick={() => dispatch(setMode())}> 
             {theme.palette.mode === "dark" ? (
               <DarkMode sx={{ fontSize: "25px" }} />
             ) : (
               <LightMode sx={{ color: dark, fontSize: "25px" }} />
             )}
-          </IconButton>
+          </IconButton>*/}
           <Message sx={{ fontSize: "25px" }} />
           <Notifications sx={{ fontSize: "25px" }} />
           <Help sx={{ fontSize: "25px" }} />
+          {/**useparams for this? */}
           <FormControl variant="standard" value={fullName}>
             <Select
               value={fullName}
@@ -104,11 +109,12 @@ const Navbar = () => {
               }}
               input={<InputBase />}
             >
-              <MenuItem value={fullName}>
-                <Typography>{fullName}</Typography>
-              </MenuItem>
+              <MenuItem onClick={() => navigate("/home")}>Home</MenuItem>
               <MenuItem onClick={() => navigate("/explore")}>Explore</MenuItem>
               <MenuItem onClick={() => navigate("/tracker")}>Fitness Tracker</MenuItem>
+              <MenuItem value={fullName} onClick={() => navigate(`/profile/${_id}`)}>
+                <Typography>{fullName}</Typography>
+              </MenuItem>
               <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
             </Select>
           </FormControl>

@@ -205,14 +205,17 @@ const Form = () => {
                   type="number"
                   error={Boolean(touched.age) && Boolean(errors.age)}
                   helperText={touched.age && errors.age}
-                  sx={{ gridColumn: "span 2" }}
+                  sx={{ gridColumn: "span 4" }}
                   InputProps={{
                     inputProps: { 
                         min: 0
                     }
                   }}
                 />
-            <FormControl required sx={{ gridColumn: "span 2" }}
+                <FormLabel sx={{paddingBottom: 0}}>
+                  Gender
+                </FormLabel>
+            <FormControl required sx={{ gridColumn: "span 4" }}
             error={Boolean(touched.gender) && Boolean(errors.gender)} helperText={touched.gender && errors.gender}        
                   >
                   <Select
@@ -223,8 +226,8 @@ const Form = () => {
                     margin='normal'
                     required
                     onChange={handleChange}
-                    error={Boolean(touched.age) && Boolean(errors.age)}
-                    helperText={touched.age && errors.age}
+                    error={Boolean(touched.gender) && Boolean(errors.gender)}
+                    helperText={touched.gender && errors.gender}
                     
                   >
                     <MenuItem value={"Male"}>Male</MenuItem>
@@ -274,6 +277,9 @@ const Form = () => {
                     )}
                   </Dropzone>
                 </Box>
+                <FormLabel sx={{paddingBottom: 0}}>
+                  Fitness Plan
+                </FormLabel>
                 <FormControl required sx={{ gridColumn: "span 4" }}
             error={Boolean(touched.fitnessPlan) && Boolean(errors.fitnessPlan)} helperText={touched.fitnessPlan && errors.fitnessPlan}        
                   >
