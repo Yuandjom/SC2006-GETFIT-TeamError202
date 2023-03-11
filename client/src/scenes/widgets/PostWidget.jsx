@@ -4,7 +4,7 @@ import {
   FavoriteOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
-import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Divider, IconButton, Typography, useTheme, InputBase, Button} from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
@@ -29,6 +29,7 @@ const PostWidget = ({
   const loggedInUserId = useSelector((state) => state.user._id);
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
+  const [postComments, setPostComments] = useState("");
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
@@ -45,6 +46,20 @@ const PostWidget = ({
     });
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
+  };
+
+  const patchComment = async () => {
+    const response = await fetch(`http://localhost:3001/posts/${postId}/comment`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ comment: postComments }),
+    });
+    const updatedPost = await response.json();
+    dispatch(setPost({ post: updatedPost }));
+    setPostComments('')
   };
 
   return (
@@ -87,18 +102,36 @@ const PostWidget = ({
             <Typography>{comments.length}</Typography>
           </FlexBetween>
         </FlexBetween>
-
-        <IconButton>
-          <ShareOutlined />
-        </IconButton>
       </FlexBetween>
       {isComments && (
         <Box mt="0.5rem">
+          <InputBase
+          placeholder="Any comments?"
+          onChange={(e) => setPostComments(e.target.value)}
+          value={postComments}
+          sx={{
+            width: "80%",
+            backgroundColor: palette.neutral.light,
+            borderRadius: "2rem",
+            padding: "0.5rem 0.5rem",
+          }}
+        />
+        <Button
+          disabled={!postComments}
+          onClick={patchComment}
+          sx={{
+            color: palette.background.alt,
+            backgroundColor: palette.primary.main,
+            borderRadius: "3rem",
+          }}
+        >
+          COMMENT
+        </Button>
           {comments.map((comment, i) => (
             <Box key={`${name}-${i}`}>
               <Divider />
               <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
-                {comment}
+                {name}: {comment}
               </Typography>
             </Box>
           ))}
