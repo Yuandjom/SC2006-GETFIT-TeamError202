@@ -90,7 +90,7 @@ const UserWidget = ({ userId, picturePath }) => {
         </Box>
         <Box display="flex" alignItems="center" gap="1rem">
           <FitnessCenterIcon fontSize="large" sx={{ color: main }} />
-          <Typography color={medium}>{fitnessPlan}</Typography>
+          <Typography color={medium}>Fitness Plan: {fitnessPlan}</Typography>
         </Box>
       </Box>
 

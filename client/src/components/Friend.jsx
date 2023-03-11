@@ -10,12 +10,9 @@ import { useLocation } from "react-router";
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
-  const posts = useSelector((state) => state.posts);
-  const {user_id} = useParams()
 
   const { palette } = useTheme();
   const primaryLight = palette.primary.light;
