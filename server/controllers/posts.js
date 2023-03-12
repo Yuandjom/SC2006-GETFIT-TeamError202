@@ -19,7 +19,7 @@ export const createPost = async (req, res) => {
     });
     await newPost.save();
 
-    const post = await Post.find();
+    const post = await Post.find().sort({ _id: -1 });
     res.status(201).json(post);
   } catch (err) {
     res.status(409).json({ message: err.message });
@@ -76,11 +76,13 @@ export const likePost = async (req, res) => {
 export const commentPost = async (req, res) => {
   try {
     const { id } = req.params;
-    const { comment } = req.body;
+    const { comment, userId } = req.body;
+    const user = await User.findById(userId);
     const post = await Post.findById(id);
+    let newComment = user.firstName.concat(": ", comment);
 
     if (post) {
-      post.comments.push(comment);
+      post.comments.push(newComment);
     }
 
     const updatedPost = await Post.findByIdAndUpdate(

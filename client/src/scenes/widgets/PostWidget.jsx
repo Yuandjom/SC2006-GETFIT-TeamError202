@@ -55,7 +55,7 @@ const PostWidget = ({
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ comment: postComments }),
+      body: JSON.stringify({ comment: postComments, userId: loggedInUserId  }),
     });
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
@@ -131,7 +131,7 @@ const PostWidget = ({
             <Box key={`${name}-${i}`}>
               <Divider />
               <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
-                {name}: {comment}
+                {comment}
               </Typography>
             </Box>
           ))}
