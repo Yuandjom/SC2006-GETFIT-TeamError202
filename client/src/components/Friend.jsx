@@ -22,6 +22,7 @@ const Friend = ({ friendId, name, subtitle, location, userPicturePath }) => {
   const isFriend = friends.find((friend) => friend._id === friendId);
   //set the condition if the user_id is the same, disable the patch button
   let isUserPost = false;
+
   if(friendId === _id){
     isUserPost = true
   }
@@ -45,7 +46,7 @@ const Friend = ({ friendId, name, subtitle, location, userPicturePath }) => {
   return (
     <FlexBetween>
       <FlexBetween gap="1rem">
-        <UserImage image={userPicturePath} size="55px" />
+        <UserImage image={userPicturePath} size="30px" />
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);

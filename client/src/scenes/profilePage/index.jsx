@@ -1,4 +1,4 @@
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -48,7 +48,9 @@ const ProfilePage = () => {
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-          <MyPostWidget picturePath={user.picturePath} />
+          <Box justifyContent={'center'}>
+            <Typography fontSize={20}> Profile Posts </Typography>
+          </Box>
           <Box m="2rem 0" />
           <PostsWidget userId={userId} isProfile />
         </Box>
