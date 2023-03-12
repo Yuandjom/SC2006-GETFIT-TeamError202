@@ -12,6 +12,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
 import UpdateUser from "scenes/updatePage/UpdateUser";
+import Test from "scenes/test/Test";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -50,6 +51,7 @@ function App() {
               path="/updateUser"
               element={isAuth ? <UpdateUser /> : <Navigate to="/" />}
             />
+            <Route path="/test" element={<Test />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
