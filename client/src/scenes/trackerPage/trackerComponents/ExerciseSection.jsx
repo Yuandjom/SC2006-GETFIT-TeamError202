@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ExerciseSection({name}) {
     return (
         <div className="mx-10 my-8">
@@ -15,7 +17,7 @@ export default function ExerciseSection({name}) {
                 </div>
             </div>
             <div>
-                <button className="font-bold mx-10"> Add Exercise </button>
+                <Link to={'/tracker/exercise'} className="font-bold mx-10"> Add Exercise </Link>
                 <hr className="my-2 border-2 border-gray-300"></hr>
             </div>
         </div>

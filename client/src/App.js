@@ -4,6 +4,8 @@ import LoginPage from "scenes/loginPage";
 import ProfilePage from "scenes/profilePage";
 import ExplorePage from "scenes/explorePage";
 import Tracker from "scenes/trackerPage/Tracker";
+import SearchFood from "scenes/trackerPage/SearchFood";
+import SearchExercise from "scenes/trackerPage/SearchExercise";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -30,6 +32,14 @@ function App() {
             <Route
               path="/tracker"
               element={isAuth ? <Tracker /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/tracker/food"
+              element={isAuth ? <SearchFood /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/tracker/exercise"
+              element={isAuth ? <SearchExercise /> : <Navigate to="/" />}
             />
             <Route
               path="/profile/:userId"
