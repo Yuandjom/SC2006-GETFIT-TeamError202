@@ -1,5 +1,10 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import SearchFood from "scenes/trackerPage/SearchFood";
+
 
 export default function FoodSection({name}) {
+
     return (
         <div className="mx-10 my-8">
             <div className="flex text-xl justify-between">
@@ -16,7 +21,7 @@ export default function FoodSection({name}) {
                 </div>
             </div>
             <div>
-                <button className="font-bold mx-10"> Add Food </button>
+                <Link to={'/tracker/food'} className="font-bold mx-10"> Add Food </Link>
                 <hr className="my-2 border-2 border-gray-300"></hr>
             </div>
         </div>

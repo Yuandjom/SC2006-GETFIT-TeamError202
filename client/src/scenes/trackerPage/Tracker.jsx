@@ -1,9 +1,9 @@
 import React from 'react';
 import "../../index.css";
-import FoodSection from "./FoodSection";
-import ExerciseSection from './ExerciseSection';
+import FoodSection from "./trackerComponents/FoodSection";
+import ExerciseSection from './trackerComponents/ExerciseSection';
 import Navbar from "scenes/navbar";
-import FoodApi from "./FoodApi";
+
 
 function Tracker() {
   return (
@@ -37,22 +37,19 @@ function Tracker() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <FoodSection 
-          name="Breakfast"
+          name = "Breakfast"
         />
         <FoodSection 
-          name="Lunch"
+          name = "Lunch"
         />
         <FoodSection 
-          name="Dinner"
+          name = "Dinner"
         />
         <ExerciseSection 
-          name="Exercise"/>
-      </div>
-      <div>
-        <FoodApi />
+          name = "Exercise"/>
       </div>
     </div>
   )
 }
 
-export default Tracker
+export default Tracker;
