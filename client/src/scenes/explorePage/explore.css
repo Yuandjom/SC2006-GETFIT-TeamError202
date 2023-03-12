@@ -1,26 +1,35 @@
 .explore-page {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* two columns with equal width */
-  grid-template-rows: auto 1fr; /* first row auto-sized, second row fills remaining space */
-  grid-gap: 20px; /* gap between grid items */
+  grid-template-columns: 1fr 1fr;
+  /* two columns with equal width */
+  grid-template-rows: auto 1fr;
+  /* first row auto-sized, second row fills remaining space */
+  grid-gap: 20px;
+  /* gap between grid items */
 
   /* additional styling */
   padding: 20px;
 }
 
 .enter-details {
-  grid-row: 1 / span 1; /* first row */
-  grid-column: 1 / span 1; /* first column */
+  grid-row: 1 / span 1;
+  /* first row */
+  grid-column: 1 / span 1;
+  /* first column */
 }
 
 .map {
-  grid-row: 1 / span 2; /* span two rows */
-  grid-column: 2 / span 1; /* second column */
+  grid-row: 1 / span 2;
+  /* span two rows */
+  grid-column: 2 / span 1;
+  /* second column */
 }
 
 .location-details {
-  grid-row: 2 / span 1; /* second row */
-  grid-column: 1 / span 1; /* first column */
+  grid-row: 2 / span 1;
+  /* second row */
+  grid-column: 1 / span 1;
+  /* first column */
   margin-top: 100px;
 }
 
