@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const foodSchema = mongoose.Schema(
+const foodexerciseSchema = mongoose.Schema(
   {
     userId: {
       type: String,
@@ -41,6 +41,6 @@ const foodSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const Food = mongoose.model("Food", foodSchema);
+const FoodExercise = mongoose.model("FoodExercise", foodexerciseSchema);
 
-export default Food;
+export default FoodExercise;
