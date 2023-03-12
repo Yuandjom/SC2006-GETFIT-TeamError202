@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 
-    <head> Search Nearby Gym
+    <head> NAVBAR
+    <link rel="stylesheet" href="styles.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDZjux3Ro6hPFyqTxKdG7Y6_fkOpeKEFY&libraries=places"></script>
     </head>
 
@@ -44,9 +45,7 @@
 
                 let req = {
                     location: place.geometry.location,
-                    // adjust search radius
                     radius: '500',
-                    // search for amenities (check google for valid places)
                     type: ['gym']
                 }
 
@@ -73,8 +72,11 @@
  
             google.maps.event.addListener(marker, 'click', function () {
                 alert(place.name);
-                //alert(place.formatted_address); 
-                // maybe can add in other features to display?
+                alert(place.business_status);
+                alert(place.vicinity);
+                
+
+                
                 
             });
         }
@@ -84,8 +86,18 @@
     </script>
 
     <body>
-        <input id="searchBox" type="text" size="60">
-        <div id="map" style="height:500px;"></div>
+        <div class="explore-page">
+            <div class="left-section">
+                <input id="searchBox" type="text" size="60">
+                <button class="searchButton"> View Options </button>
+            
+
+
+            </div>
+            <div class="right-section">
+                <div id="map" style="height:500px;"></div>
+            </div>  
+        </div>
     </body>
 
 
