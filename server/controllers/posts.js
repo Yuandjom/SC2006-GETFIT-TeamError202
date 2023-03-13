@@ -97,3 +97,21 @@ export const commentPost = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
+/**Delete the post */
+export const deletePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req.body;
+    const user = await User.findById(userId);
+    const post = await Post.findByIdAndRemove(id);
+    //if the post is found and removed
+    if (post);
+
+    const updatedFeed = await Post.find().sort({ _id: -1 });
+    res.status(200).json(updatedFeed);
+  } catch (err) {
+    console.log("error here");
+    res.status(404).json({ message: err.message });
+  }
+};

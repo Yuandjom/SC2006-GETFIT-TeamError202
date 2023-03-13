@@ -4,6 +4,7 @@ import {
   FavoriteOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Box, Divider, IconButton, Typography, useTheme, InputBase, Button} from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
@@ -62,6 +63,22 @@ const PostWidget = ({
     setPostComments('')
   };
 
+  const handleDelete = async () => {
+    const response = await fetch(
+      `http://localhost:3001/posts/${postId}/delete`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: loggedInUserId  }),
+      }
+    );
+    const updatedPost = await response.json();
+    dispatch(setPost({ post: updatedPost }));
+  };
+
   return (
     <WidgetWrapper m="2rem 0">
       <Friend
@@ -72,7 +89,11 @@ const PostWidget = ({
       />
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
+        <IconButton onClick={handleDelete} color='error'>
+            <DeleteForeverIcon />
+      </IconButton>
       </Typography>
+
       {picturePath && (
         <img
           width="100%"

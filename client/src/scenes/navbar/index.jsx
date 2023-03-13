@@ -59,6 +59,7 @@ const Navbar = () => {
         >
           GETFIT
         </Typography>
+        {/* comment out the search bar 
         {isNonMobileScreens && (
           <FlexBetween
             backgroundColor={neutralLight}
@@ -71,7 +72,7 @@ const Navbar = () => {
               <Search />
             </IconButton>
           </FlexBetween>
-        )}
+        )} */}
       </FlexBetween>
 
       {/* DESKTOP NAV */}
