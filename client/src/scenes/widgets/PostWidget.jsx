@@ -87,11 +87,12 @@ const PostWidget = ({
         subtitle={location}
         userPicturePath={userPicturePath}
       />
-      <Typography color={main} sx={{ mt: "1rem" }}>
-        {description}
-        <IconButton onClick={handleDelete} color='error'>
+      <IconButton onClick={handleDelete} color='error'>
             <DeleteForeverIcon />
       </IconButton>
+      <Typography color={main} sx={{ mt: "1rem" }}>
+        {description}
+
       </Typography>
 
       {picturePath && (
