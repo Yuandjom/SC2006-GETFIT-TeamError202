@@ -6,25 +6,17 @@ export default function SearchFood() {
 
     const [input, setInput] = useState("");
     const [foodData, setFoodData] = useState([]);
-    
-    /*
-    const [chosenFood, setChosenFood] = useState();
-    const [select, setSelect] = useState(false);
-    */
 
-    //const [search, setSearch] = useState(false);
+    const [chosenFood, setChosenFood] = useState({});
 
     const handleChange = (e) => {
         e.preventDefault();
         setInput(e.target.value);
     }
 
-    /*
     const handleSubmitFood = (food) => {
         setChosenFood(food);
     }
-    */
-
 
     //call the api
     const Search = (e) => {
@@ -99,7 +91,7 @@ export default function SearchFood() {
                             <h2> {food.lipids} </h2>
                             <div className="flex justify-between items-center"> 
                                 <h2> {food.carbohydrates} </h2>
-                                <button>
+                                <button onClick={handleSubmitFood(food)}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
@@ -110,12 +102,12 @@ export default function SearchFood() {
                     </div>
                     ))}
                 </div>}
-                {/*
-                {select &&
+
+                { Object.values(chosenFood).length == 0 &&
                 <SubmitFood 
                 food= {chosenFood} />
-                }   
-            */}
+                }  
+
             </div>
         </div>
     )
