@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Divider, Typography, useTheme } from "@mui/material";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
 import { useEffect } from "react";
@@ -36,7 +36,9 @@ const FriendListWidget = ({ userId }) => {
         sx={{ mb: "1.5rem" }}
       >
         Friend List
+        <Divider />
       </Typography>
+
       <Box display="flex" flexDirection="column" gap="1.5rem">
         {friends.map((friend) => (
           <Friend
