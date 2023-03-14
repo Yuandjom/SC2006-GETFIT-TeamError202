@@ -9,6 +9,8 @@ import {
   FormControl,
   useTheme,
   useMediaQuery,
+  Stack,
+  Button,
 } from "@mui/material";
 import {
   Search,
@@ -88,9 +90,15 @@ const Navbar = () => {
               <LightMode sx={{ color: dark, fontSize: "25px" }} />
             )}
           </IconButton>*/}
-          <Message sx={{ fontSize: "25px" }} />
+          <Stack direction="row" spacing={1}>
+            <Button color='inherit' onClick={() => navigate("/home")} >Home</Button>
+            <Button color='inherit' onClick={() => navigate("/explore")} >Explore</Button>
+            <Button color='inherit' onClick={() => navigate("/tracker")} >Tracker</Button>
+            <Button color='inherit' onClick={() => navigate(`/profile/${_id}`)} >Profile</Button>
+          </Stack>
+          {/* <Message sx={{ fontSize: "25px" }} />
           <Notifications sx={{ fontSize: "25px" }} />
-          <Help sx={{ fontSize: "25px" }} />
+          <Help sx={{ fontSize: "25px" }} /> */}
           {/**useparams for this? */}
           <FormControl variant="standard" value={fullName}>
             <Select
@@ -110,9 +118,9 @@ const Navbar = () => {
               }}
               input={<InputBase />}
             >
-              <MenuItem onClick={() => navigate("/home")}>Home</MenuItem>
+              {/* <MenuItem onClick={() => navigate("/home")}>Home</MenuItem>
               <MenuItem onClick={() => navigate("/explore")}>Explore</MenuItem>
-              <MenuItem onClick={() => navigate("/tracker")}>Fitness Tracker</MenuItem>
+              <MenuItem onClick={() => navigate("/tracker")}>Fitness Tracker</MenuItem> */}
               <MenuItem value={fullName} onClick={() => navigate(`/profile/${_id}`)}>
                 <Typography>{fullName}</Typography>
               </MenuItem>
