@@ -29,7 +29,8 @@ export default function SubmitFood({food}) {
                     <h2 className="mt-5 text-xl"> Which meal? </h2>
 
                     <div className="mt-5">
-                        <label className="shadow shadow-inner shadow-xl shadow-black p-3">
+                        {/*shadow shadow-inner shadow-xl shadow-black */}
+                        <label className="p-3">
                             <select name="selectedFruit" value={meal} onChange={e => setMeal(e.target.value)}>
                                 <option value="Breakfast">Breakfast</option>
                                 <option value="Lunch">Lunch</option>
