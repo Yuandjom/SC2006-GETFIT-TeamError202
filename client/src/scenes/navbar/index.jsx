@@ -113,7 +113,7 @@ const Navbar = () => {
               <MenuItem onClick={() => navigate("/home")}>Home</MenuItem>
               <MenuItem onClick={() => navigate("/explore")}>Explore</MenuItem>
               <MenuItem onClick={() => navigate("/tracker")}>Fitness Tracker</MenuItem>
-              <MenuItem value={fullName} onClick={() => navigate(`/profile/${_id}`)}>
+              <MenuItem onClick={() => navigate(`/profile/${_id}`)}>
                 <Typography>{fullName}</Typography>
               </MenuItem>
               <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
