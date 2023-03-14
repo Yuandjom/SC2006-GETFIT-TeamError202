@@ -79,6 +79,13 @@ const PostWidget = ({
     dispatch(setPost({ post: updatedPost }));
   };
 
+
+  let isUserPost = false;
+
+  if(postUserId === loggedInUserId){
+    isUserPost = true
+  }
+
   return (
     <WidgetWrapper m="2rem 0">
       <Friend
@@ -87,9 +94,18 @@ const PostWidget = ({
         subtitle={location}
         userPicturePath={userPicturePath}
       />
-      <IconButton onClick={handleDelete} color='error'>
-            <DeleteForeverIcon />
-      </IconButton>
+      <FlexBetween>
+        <Typography>
+          
+        </Typography>
+        {isUserPost?        
+        <IconButton onClick={handleDelete} color='error' sx = {{p: "0.6rem"}} >
+              <DeleteForeverIcon />
+        </IconButton>: <></>
+        }
+
+      </FlexBetween>
+
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
 
