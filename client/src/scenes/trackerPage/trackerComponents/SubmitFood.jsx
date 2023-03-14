@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 export default function SubmitFood({food}) {
     
     const [servings,setServings] = useState(0);
