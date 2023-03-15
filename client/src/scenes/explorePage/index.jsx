@@ -32,11 +32,11 @@ function ExplorePage() {
 
    const [currentPosition, setCurrentPosition] = useState(null) //what i added
    const [nearbyPlaces, setNearbyPlaces] = useState([])
-   const [searchRadius, setSearchRadius] = useState(500)
+   const [searchRadius, setSearchRadius] = useState(0)
    const [markers, setMarkers] = useState([])
    const [selectedMarkers, setSelectedMarkers] = useState([])
 
-   /*/access current location
+   //access current location
    if (navigator.geolocation) {
          navigator.geolocation.getCurrentPosition(
            (position) => {
@@ -51,7 +51,7 @@ function ExplorePage() {
          );
        } else {
            console.log("Geolocation is not supported by this browser.");
-         }*/
+         }
   
    //manually search current location
    const handleLocationSearch = (e) => {
@@ -71,23 +71,26 @@ function ExplorePage() {
        });
    };
 
-   //create a new PlacesService object
-   const service = new window.google.maps.places.PlacesService(document.createElement('div'));
+   if(currentPosition){
+      //create a new PlacesService object
+      const service = new window.google.maps.places.PlacesService(document.createElement('div'));
 
-   // Define the request object
-   const request = {
-     location: currentPosition,
-     radius: searchRadius,
-     type: 'gym'
-   };
+      // Define the request object
+      const request = {
+        location: currentPosition,
+        radius: searchRadius,
+        type: 'gym'
+      };
 
-   // Call the PlacesService nearbySearch method
+      // Call the PlacesService nearbySearch method
       service.nearbySearch(request, (results, status) => {
-        if (status === 'OK') {
+          if (status === 'OK') {
           setNearbyPlaces(results);
           //setMarkers(results);
         }
   }, [currentPosition]);
+  }
+  
 
   const handleChange = (event) => {
     setSearchRadius(event.target.value);
@@ -100,14 +103,33 @@ function ExplorePage() {
    }
 
    const DisplayMarker = (place) => {
+        // Create a DistanceMatrixService object
+        const distanceService = new window.google.maps.DistanceMatrixService();
+
+        // Call the distance matrix service to get the distance between the user's location and the place
+        distanceService.getDistanceMatrix({
+        origins: [currentPosition],
+        destinations: [place.geometry.location],
+        travelMode: window.google.maps.TravelMode.DRIVING, 
+        unitSystem: window.google.maps.UnitSystem.METRIC, // Use metric units (km)
+        }, (response, status) => {
+          if (status === 'OK') {
+        // Get the distance value from the response
+        const distance = response.rows[0].elements[0].distance.text;
+        
         let sidePanel = document.getElementById('details-panel');
         sidePanel.innerHTML = `
         <p><strong>Name:  </strong>${place.name}</p>
         <p><strong>Business Status:  </strong>${place.business_status}</p>
         <p><strong>Opening Hours: </strong>${place.opening_hours ? JSON.stringify(place.opening_hours.weekday_text) : 'Not available'}</p>
         <p><strong>Address:  </strong>${place.vicinity}</p>
+        <p><strong>Distance:</strong> ${distance}</p>
     `;
+  } else {
+    console.error('Error getting distance: ', status);
   }
+});
+}
 
    return (
        <div>
@@ -128,6 +150,7 @@ function ExplorePage() {
                        <div className='searchRadius'>
                        <label htmlFor="radius-input">Select Search Radius (km):</label>
                        <select id="radius-input" value={searchRadius} onChange={handleChange} >
+                           <option value="">--Select radius--</option>
                            <option value="1000">1 km</option>
                            <option value="2000">2 km</option>
                            <option value="5000">5 km</option>
