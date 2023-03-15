@@ -15,7 +15,7 @@ import {
    InfoWindow,
 } from '@react-google-maps/api'
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, CardContent, Card } from '@mui/material';
 import { Place } from '@mui/icons-material';
 import { current } from '@reduxjs/toolkit';
 
@@ -35,6 +35,13 @@ function ExplorePage() {
    const [searchRadius, setSearchRadius] = useState(0)
    const [markers, setMarkers] = useState([])
    const [selectedMarkers, setSelectedMarkers] = useState([])
+   const [place, setPlace] = useState({
+    name: '', 
+    business_status: '', 
+    opening_hours: '', 
+    vicinity: '',
+    distance: '',
+   });
 
    //access current location
    if (navigator.geolocation) {
@@ -116,15 +123,19 @@ function ExplorePage() {
           if (status === 'OK') {
         // Get the distance value from the response
         const distance = response.rows[0].elements[0].distance.text;
+        const opening_hours = place.opening_hours ? JSON.stringify(place.opening_hours.weekday_text) : 'Not available'
+        setPlace({name : place.name, business_status: place.business_status, opening_hours: opening_hours, vicinity: place.vicinity, distance: distance
         
-        let sidePanel = document.getElementById('details-panel');
-        sidePanel.innerHTML = `
-        <p><strong>Name:  </strong>${place.name}</p>
-        <p><strong>Business Status:  </strong>${place.business_status}</p>
-        <p><strong>Opening Hours: </strong>${place.opening_hours ? JSON.stringify(place.opening_hours.weekday_text) : 'Not available'}</p>
-        <p><strong>Address:  </strong>${place.vicinity}</p>
-        <p><strong>Distance:</strong> ${distance}</p>
-    `;
+        })
+        
+    //     let sidePanel = document.getElementById('details-panel');
+    //     sidePanel.innerHTML = `
+    //     <p><strong>Name:  </strong>${place.name}</p>
+    //     <p><strong>Business Status:  </strong>${place.business_status}</p>
+    //     <p><strong>Opening Hours: </strong>${place.opening_hours ? JSON.stringify(place.opening_hours.weekday_text) : 'Not available'}</p>
+    //     <p><strong>Address:  </strong>${place.vicinity}</p>
+    //     <p><strong>Distance:</strong> ${distance}</p>
+    // `;
   } else {
     console.error('Error getting distance: ', status);
   }
@@ -159,7 +170,28 @@ function ExplorePage() {
                        </div>
 
                    </form>
-                   <div id = 'details-panel'></div>
+                   {/* <div id = 'details-panel'></div> */}
+                   <Box sx={{ minWidth: 275 }}>
+                      <Card variant="outlined">
+                        <CardContent>
+                          <Typography variant="h5" gutterBottom>
+                            Name of location: {place.name}
+                          </Typography>
+                          <Typography sx={{ fontSize: 14 }}  component="div">
+                            Opening Status: {place.business_status}
+                          </Typography>
+                          <Typography  sx={{ mb: 1.5 }} color="text.secondary">
+                            Opening Hours: {place.opening_hours}
+                          </Typography>
+                          <Typography variant="body1">
+                            Distance: {place.distance} 
+                            <br />
+                            Vicinity: {place.vicinity}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                  </Box>
+
                </div>
                {/* "https://api.mapbox.com/styles/v1/kavita99/streets-v11/static/-122.4194,37.7749,12/500x500?access_token={pk.eyJ1Ijoia2F2aXRhOTkiLCJhIjoiY2xlbGJobXBtMHRwazNwcGRvb2gyczdoNiJ9.9m7kO12Jp60Cjf7Rkushow}" */}
                {/**some time can work */}
