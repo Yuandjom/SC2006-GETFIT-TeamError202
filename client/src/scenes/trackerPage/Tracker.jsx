@@ -14,16 +14,17 @@ function Tracker() {
     
     <div>
         <Navbar />
-      <div className="mt-6 flex gap-2 justify-center items-center">
-        <Datepicker
-          inputClassName="bg-gray-200"
-          containerClassName="bg-gray-200 w-40" 
-          asSingle={true} 
-          useRange={false} 
-          placeholder={new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()} 
-          value={date}
-          onChange={date => setDate(date)}
-        />
+      <div className="mt-6 flex justify-center">
+        <div>
+          <Datepicker 
+            inputClassName="bg-gray-200 w-36"
+            asSingle={true} 
+            useRange={false} 
+            placeholder={new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()} 
+            value={date}
+            onChange={date => setDate(date)}
+          />
+        </div>
       </div>
       <div className="mt-8 bg-gray-200 mx-10 px-5 py-5 rounded-xl">
         <h1 className="text-2xl font-bold"> Calories Remaining </h1>
