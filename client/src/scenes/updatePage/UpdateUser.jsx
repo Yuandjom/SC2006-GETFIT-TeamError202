@@ -47,11 +47,15 @@ function UpdateUser() {
 
           </div>
           <div className="updateElement">
-            HEIGHT
+            <div className="elementTitle">
+              HEIGHT
+            </div>
             <input type="updateProfileText" id="elementBox"></input>
           </div>
           <div className="updateElement">
-            WEIGHT
+            <div className="elementTitle">
+              WEIGHT
+            </div>
             <input type="updateProfileText" id="elementBox"></input>
           </div>
           <button className="updateButton">
