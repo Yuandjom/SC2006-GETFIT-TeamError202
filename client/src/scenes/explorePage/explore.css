@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   /* two columns with equal width */
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 1fr;
   /* first row auto-sized, second row fills remaining space */
   grid-gap: 20px;
   /* gap between grid items */
@@ -15,7 +15,27 @@
   grid-row: 1 / span 1;
   /* first row */
   grid-column: 1 / span 1;
+  width: 500px;
   /* first column */
+}
+
+#details-panel{
+  background-color: #dfe3f1;
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 1;
+  width: 500px;
+  height: 200px;
+  border-radius: 2px;
+  border: 1px solid rgb(103, 100, 100);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: large;
+  margin-top: 100px;
+}
+
+.locationInput {
+  width: 500px
 }
 
 .map {
@@ -25,41 +45,38 @@
   /* second column */
 }
 
-.location-details {
-  grid-row: 2 / span 1;
-  /* second row */
-  grid-column: 1 / span 1;
-  /* first column */
-  margin-top: 100px;
-}
-
-.location-details .details-container {
-  border: 1px solid #ddd;
-  padding: 10px;
-}
-
-.location-details h3 {
-  margin-top: 0;
-}
-
 .enter-details form {
   display: flex;
   flex-direction: column;
 }
 
-.enter-details label {
-  margin-bottom: 5px;
+.enter-details .searchRadius {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
 }
 
-.enter-details input,
-.enter-details select {
+.enter-details .searchRadius label {
+  
+  margin-bottom: 5px;
+
+}
+
+.enter-details .searchRadius select {
   margin-bottom: 10px;
   padding: 5px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
 
-.enter-details button[type="submit"] {
+.enter-details .locationInput input {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.enter-details .locationInput button[type="submit"] {
   background-color: #fdc0c0;
   color: rgb(1, 1, 1);
   padding: 10px;
@@ -67,12 +84,15 @@
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
+  height: 40px;
+  width: 500px
 }
 
-.enter-details button[type="submit"]:hover {
+.enter-details .locationInput button[type="submit"]:hover {
   background-color: #f77e7e;
 }
 
 .enter-details h2 {
   margin-top: 0;
+  margin-bottom: 100px;
 }
