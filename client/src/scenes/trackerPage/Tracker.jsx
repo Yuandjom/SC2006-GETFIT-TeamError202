@@ -11,7 +11,6 @@ function Tracker() {
   const [date, setDate] = useState(new Date());
 
   return (
-    
     <div>
         <Navbar />
       <div className="mt-6 flex justify-center">

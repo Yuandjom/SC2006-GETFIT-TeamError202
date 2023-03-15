@@ -15,14 +15,6 @@ export default function SearchFood() {
     }
 
     const handleSubmitFood = (food) => {
-        /*
-        const foodInfo = {
-            name: food.name,
-            protein: food.protein,
-            lipids: food.lipids,
-            carbohydrates: food.carbohydrates,
-        }
-        */
         setChosenFood(food);
     }
 
@@ -59,6 +51,26 @@ export default function SearchFood() {
             data.foods.map(food => {
             //nutrients is an array 
             const nutrients = food.foodNutrients;
+            //get measurements array 
+            const measuresArr = food.foodMeasures;
+
+            var measure;
+
+            //get lowest rank 
+            var min = Math.min(...measuresArr.map(item => item.rank));
+            console.log(min);
+
+            for (let i=0; i<measuresArr.length; i++) {
+                if (measuresArr[i].rank === min) {
+                    measure = measuresArr[i];
+                    break;
+                }
+            }
+            console.log(measuresArr);
+
+            console.log(measure);
+
+
             //calculate calories 
             const calories = calCalories(nutrients[0].value, nutrients[1].value, nutrients[2].value);
             //need to store foods info in an array 
@@ -68,6 +80,8 @@ export default function SearchFood() {
                 lipids: nutrients[1].value,
                 carbohydrates: nutrients[2].value,
                 calories: calories,
+                measure: measure.disseminationText,
+                grams: measure.gramWeight,
             }
             setFoodData(oldArray => [...oldArray, foodInfo]);
         })})
@@ -92,31 +106,36 @@ export default function SearchFood() {
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-0"> 
                 <div> 
-                    {foodData.length > 0 && 
-                    <div className="ml-12 mb-10 overflow-y-scroll h-72 w-4/5 md:w-3/5 lg:w-4/5 border border-black px-5">
-                        <div className="mt-4 mr-10 flex justify-between font-bold">
-                                <h2> Description </h2>
-                                <h2> Calories </h2>
-                        </div>
-                        <hr className="my-2 border-1 border-gray-300"></hr>
-                        
-                        {foodData.map(food => (
-                        <div>
-                            <div className="mt-4 flex justify-between items-center">
-                                <h2> {food.name} </h2>
-                                <div className="flex justify-between gap-8 items-center"> 
-                                    <h2> {food.calories} </h2>
-                                    <button onClick={() => handleSubmitFood(food)}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </button>
-                                </div>
+
+                    {foodData.length > 0 &&
+                    <div className="ml-12 mb-6 w-4/5 md:w-3/5 lg:w-4/5">
+                        <div className="overflow-y-scroll h-72 border border-black px-5">
+                            <div className="mt-4 mr-10 flex justify-between font-bold">
+                                    <h2> Description </h2>
+                                    <h2> Calories </h2>
                             </div>
                             <hr className="my-2 border-1 border-gray-300"></hr>
+                            
+                            {foodData.map(food => (
+                            <div>
+                                <div className="mt-4 flex justify-between items-center">
+                                    <h2> {food.name} </h2>
+                                    <div className="flex justify-between gap-8 items-center"> 
+                                        <h2> {food.calories} </h2>
+                                        <button onClick={() => handleSubmitFood(food)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr className="my-2 border-1 border-gray-300"></hr>
+                            </div>
+                            ))}
                         </div>
-                        ))}
+                        <h2 className="mt-5"> *Calories are in 100g of food </h2>
                     </div>}
+
                 </div>
                 <div>
                     {Object.values(chosenFood).length !== 0 &&
