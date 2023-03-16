@@ -13,6 +13,7 @@ import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
 import UpdateUser from "scenes/updatePage/UpdateUser";
 import Test from "scenes/test/Test";
+import Search from "scenes/searchPage/Search";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -50,6 +51,10 @@ function App() {
             <Route
               path="/updateUser"
               element={isAuth ? <UpdateUser /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/findFriends"
+              element={isAuth ? <Search /> : <Navigate to="/" />}
             />
             <Route path="/test" element={<Test />} />
           </Routes>
