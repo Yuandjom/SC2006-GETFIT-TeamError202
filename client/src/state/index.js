@@ -4,7 +4,9 @@ const initialState = {
   mode: "light",
   user: null,
   token: null,
+  date: new Date(),
   posts: [],
+  foodexercise: [],
 };
 
 export const authSlice = createSlice({
@@ -39,9 +41,15 @@ export const authSlice = createSlice({
       });
       state.posts = updatedPosts;
     },
+    setDate: (state, action) => {
+      state.date = action.payload.date;
+    },
+    setFoodExercise: (state, action) => {
+      state.foodexercise = action.payload.foodexercise;
+    },
   },
 });
 
-export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost } =
+export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost, setFoodExercise, setDate } =
   authSlice.actions;
 export default authSlice.reducer;
