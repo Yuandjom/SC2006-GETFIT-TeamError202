@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDate, setFoodExercise } from "state";
 //import fetch from 'node-fetch';
 
-function Tracker() {
+export default function Tracker() {
 
   const dispatch = useDispatch();
 
@@ -17,8 +17,6 @@ function Tracker() {
   const token = useSelector((state) => state.token);
   const date = useSelector((state) => state.date);
   const foodExerciseArr = useSelector((state) => state.foodexercise);
-
-  console.log(foodExerciseArr);
 
   const getFoodExerciseDoc  = async() => {
     const response = await fetch(`http://localhost:3001/tracker?userid=${_id}&date=${date.startDate}`, {
@@ -29,10 +27,6 @@ function Tracker() {
             },
         });
     const updatedFoodExercise = await response.json();
-
-    console.log(updatedFoodExercise);
-    console.log(updatedFoodExercise.breakfast);
-
     dispatch(setFoodExercise({foodexercise: updatedFoodExercise}));
   };
 
@@ -103,4 +97,3 @@ function Tracker() {
   )
 }
 
-export default Tracker;
