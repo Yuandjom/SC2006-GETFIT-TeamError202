@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { setFoodExercise } from "state";
 
 export default function SubmitFood({food}) {
