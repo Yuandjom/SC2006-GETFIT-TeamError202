@@ -18,35 +18,6 @@ export const addFood = async (req, res) => {
         servings: servings,
     }
     
-    /*
-    //check if date exists 
-    const foodExercise = await FoodExercise.find({userId: userid, date: date}).count();
-
-    // if does not exists --> create one 
-    if (foodExercise === 0) {
-        await FoodExercise.create({
-            userId: userid,
-            breakfast: [],
-            lunch: [],
-            dinner: [],
-            exercise: [],
-            date: date,
-        }, function (err, user) {
-            if (err) {
-                console.log("Error creating FoodExercise: ", err);
-                res
-                    .status(400)
-                    .json(err)
-            } else {
-                console.log("FoodExercise Created: ", user);
-                res
-                .status(201)
-                .json(user)
-            }
-        })
-    }
-    */
-
     //add object to the meal array 
     
     //get foodExercise doc
@@ -126,6 +97,34 @@ export const getFoodExercise = async (req, res) => {
         const foodExercise = await FoodExercise.findOne({userId: userid, date: date});
 
         res.status(200).json(foodExercise);
+    } catch (err) {
+        console.log("error here");
+        res.status(404).json({ message: err.message });
+    }
+}
+
+export const addExercise = async (req, res) => {
+
+    try {
+
+    const { userid, date, name, calories, duration } = req.body;
+
+    const exerciseData = {
+        name: name, 
+        calories: calories,
+        duration: duration,
+    }
+
+    const foodExercise = await FoodExercise.findOne({userId: userid, date: date});
+
+    foodExercise.exercise.push(exerciseData);
+
+    const updatedFoodExercise = await FoodExercise.findOneAndUpdate(
+        {userId: userid, date: date},
+        {exercise: foodExercise.exercise},
+    )
+
+    res.status(200).json(updatedFoodExercise);
     } catch (err) {
         console.log("error here");
         res.status(404).json({ message: err.message });
