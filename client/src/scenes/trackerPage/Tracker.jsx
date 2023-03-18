@@ -95,10 +95,9 @@ function Tracker() {
         name = "Dinner"
         food = {foodExerciseArr.dinner}
       />
-
-  
       <ExerciseSection 
-          name = "Exercise"/>
+        name = "Exercise"
+        exercise = {foodExerciseArr.exercise}/>
       </div>
     </div>
   )
