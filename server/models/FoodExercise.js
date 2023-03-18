@@ -6,18 +6,6 @@ const foodexerciseSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
-    location: String,
-    description: String,
-    picturePath: String,
-    userPicturePath: String,
     breakfast: {
       type: Array,
       default: [],
@@ -35,7 +23,8 @@ const foodexerciseSchema = mongoose.Schema(
       default: [],
     },
     date: {
-      type: Date,
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }
