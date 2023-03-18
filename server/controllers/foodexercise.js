@@ -122,6 +122,7 @@ export const addExercise = async (req, res) => {
     const updatedFoodExercise = await FoodExercise.findOneAndUpdate(
         {userId: userid, date: date},
         {exercise: foodExercise.exercise},
+        {new : true}
     )
 
     res.status(200).json(updatedFoodExercise);
@@ -129,4 +130,47 @@ export const addExercise = async (req, res) => {
         console.log("error here");
         res.status(404).json({ message: err.message });
     }
+}
+
+export const deleteExercise = async (req, res) => {
+
+    try {
+
+        const {userid, date, name, duration} = req.body;
+        
+        const foodExercise = await FoodExercise.findOne({userId: userid, date: date});
+
+        console.log(name);
+        console.log(duration);
+
+        for (let i=0; i<foodExercise.exercise.length; i++) {
+            if (foodExercise.exercise[i].name === name && foodExercise.exercise[i].duration === duration) {
+                foodExercise.exercise.splice(i, 1);
+                break;
+            }
+        }
+
+        console.log(foodExercise.exercise);
+
+        const updatedFoodExercise = await FoodExercise.findOneAndUpdate(
+            {userId: userid, date: date},
+            {exercise: foodExercise.exercise},
+            {new : true}
+        )
+
+        res.status(200).json(updatedFoodExercise);
+
+    } catch (err) {
+        console.log("error here");
+        res.status(404).json({ message: err.message });
+    }
+
+
+    /*
+    const foodExercise = await FoodExercise.updateOne(
+        { userId: userid, date: date},
+        { $pull : {'exercise':""} }
+    )
+    */
+
 }
