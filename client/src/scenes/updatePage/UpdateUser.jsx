@@ -1,6 +1,8 @@
 import React from 'react'
 import { Box, useMediaQuery } from "@mui/material";
 import Navbar from "scenes/navbar";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import "./UpdateUser.css";
 
@@ -14,11 +16,45 @@ import "./UpdateUser.css";
 // import FlexBetween from "components/FlexBetween";
 // import Friend from "components/Friend";
 // import WidgetWrapper from "components/WidgetWrapper";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { setPost } from "state";
 
+
 function UpdateUser() {
+
+  //from your url link the id 
+  const loggedInUserId = useSelector((state) => state.user._id);
+  const token = useSelector((state) => state.token);
+
+  const [user, setUser] = useState();
+  const [input, setInput] = useState("");
+  //fetch your user id data
+  const getUser = async () => {
+    const response = await fetch(`http://localhost:3001/users/${loggedInUserId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    setUser(data);
+  };
+
+  useEffect(() => {
+    getUser();
+    console.log(user)
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const onClickHandler = (e) => {
+    
+  }
+  const handleChange = (e) => {
+    e.preventDefault();
+    setInput(e.target.value);
+  }
+  //mount it 
+  if(!user){
+    return ""
+  }
 
   return (
 
@@ -27,7 +63,8 @@ function UpdateUser() {
       <div className="updatePrompt">
         <div className="updateBox">
           <div className="updateTitle">
-            EDIT INFORMATION
+            {/* EDIT INFORMATION */}
+            {user.firstName}
           </div>
           <div className="updateElement">
             <div className="elementTitle">

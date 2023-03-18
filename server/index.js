@@ -48,9 +48,16 @@ app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 /* ROUTES */
+
 app.use("/auth", authRoutes);
+//http://localhost:3001/auth
+
 app.use("/users", userRoutes);
+//http://localhost:3001/users
+
+// postRoutes
 app.use("/posts", postRoutes);
+//http://localhost:3001/posts
 
 /* MONGOOSE SETUP */
 // localhost:3001/
