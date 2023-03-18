@@ -66,10 +66,8 @@ export default function SearchFood() {
                     break;
                 }
             }
-            console.log(measuresArr);
-
-            console.log(measure);
-
+            //console.log(measuresArr);
+            //console.log(measure);
 
             //calculate calories 
             const calories = calCalories(nutrients[0].value, nutrients[1].value, nutrients[2].value);
