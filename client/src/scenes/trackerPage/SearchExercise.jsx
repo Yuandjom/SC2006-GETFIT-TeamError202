@@ -25,6 +25,7 @@ export default function SearchExercise() {
         e.preventDefault();
 
         setExerciseData([]);
+        setChosenExercise({});
 
         const {REACT_APP_EXERCISE_API_KEY} = process.env;
 

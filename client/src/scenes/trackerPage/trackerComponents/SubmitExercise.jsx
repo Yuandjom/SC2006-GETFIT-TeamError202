@@ -4,7 +4,7 @@ import { setFoodExercise } from "state";
 
 export default function SubmitExercise({exercise}) {
 
-    console.log(exercise);
+    //console.log(exercise);
     
     const dispatch = useDispatch();
 
@@ -37,9 +37,6 @@ export default function SubmitExercise({exercise}) {
 
         console.log(exerciseData);
 
-        //need check to see if the post has been created??? --> then add meal 
-        //if not created then create a new one 
-        /*
         const response = await fetch(`http://localhost:3001/tracker/exercise`, {
             method: "PATCH",
             headers: {
@@ -51,7 +48,7 @@ export default function SubmitExercise({exercise}) {
         const updatedFoodExercise = await response.json();
 
         dispatch(setFoodExercise({foodexercise: updatedFoodExercise}));
-        */
+
     }
 
     return (
