@@ -1,14 +1,57 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "../../index.css";
 import FoodSection from "./trackerComponents/FoodSection";
 import ExerciseSection from './trackerComponents/ExerciseSection';
 import Navbar from "scenes/navbar";
 import { useState } from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
+import { useDispatch, useSelector } from "react-redux";
+import { setDate, setFoodExercise } from "state";
+//import fetch from 'node-fetch';
 
 function Tracker() {
 
-  const [date, setDate] = useState(new Date());
+  const dispatch = useDispatch();
+
+  const { _id } = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const date = useSelector((state) => state.date);
+  const foodExerciseArr = useSelector((state) => state.foodexercise);
+
+  console.log(foodExerciseArr);
+
+  const getFoodExerciseDoc  = async() => {
+    const response = await fetch(`http://localhost:3001/tracker?userid=${_id}&date=${date.startDate}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+    const updatedFoodExercise = await response.json();
+
+    console.log(updatedFoodExercise);
+    console.log(updatedFoodExercise.breakfast);
+
+    dispatch(setFoodExercise({foodexercise: updatedFoodExercise}));
+  };
+
+  useEffect(() => {
+
+    getFoodExerciseDoc();
+    
+  }, [date]);
+
+  const handleDate = async (updatedDate) => {
+    
+    console.log(updatedDate.startDate);
+
+    if (updatedDate.startDate === null) {
+      return;
+    }
+
+    dispatch(setDate({date: updatedDate}));
+  }
 
   return (
     <div>
@@ -16,12 +59,12 @@ function Tracker() {
       <div className="mt-6 flex justify-center">
         <div>
           <Datepicker 
-            inputClassName="bg-gray-200 w-36"
+            inputClassName="bg-gray-200 w-44"
             asSingle={true} 
             useRange={false} 
-            placeholder={new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()} 
+            placeholder="YY-MM-DD" 
             value={date}
-            onChange={date => setDate(date)}
+            onChange={handleDate}
           />
         </div>
       </div>
@@ -38,16 +81,23 @@ function Tracker() {
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        <FoodSection 
-          name = "Breakfast"
-        />
-        <FoodSection 
-          name = "Lunch"
-        />
-        <FoodSection 
-          name = "Dinner"
-        />
-        <ExerciseSection 
+
+
+      <FoodSection 
+        name = "Breakfast"
+        food = {foodExerciseArr.breakfast}
+      />
+      <FoodSection 
+        name = "Lunch"
+        food = {foodExerciseArr.lunch}
+      />
+      <FoodSection 
+        name = "Dinner"
+        food = {foodExerciseArr.dinner}
+      />
+
+  
+      <ExerciseSection 
           name = "Exercise"/>
       </div>
     </div>
