@@ -1,10 +1,63 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { setFoodExercise } from "state";
 
 export default function SubmitFood({food}) {
-    
+
+    const dispatch = useDispatch();
+
+    //get userid
+    const { _id } = useSelector((state) => state.user);
+    const token = useSelector((state) => state.token);
+    const date = useSelector((state) => state.date);
+
     const [servings,setServings] = useState(1);
-    const [meal, setMeal] = useState('Breakfast');
+    const [meal, setMeal] = useState("breakfast");
     const [measure, setMeasure] = useState('100g');
+
+
+    //after submit --> post
+    const handleSubmit = async () => {
+
+        var finalCalories;
+
+        //count total calories 
+        if (measure === '100g') {
+            finalCalories = Number(food.calories*servings).toFixed(2);
+        }
+        else {
+            finalCalories = Number(food.calories*servings*(food.grams/100)).toFixed(2);
+        }
+        
+        //create data to be passed in 
+        
+        const foodData = {
+            userid: _id,
+            date: date.startDate, 
+            name: food.name,
+            calories: finalCalories,
+            meal: meal,
+            measure: measure,
+            servings: servings,
+        }
+
+        //console.log(foodData);
+
+        //need check to see if the post has been created??? --> then add meal 
+        //if not created then create a new one 
+        const response = await fetch(`http://localhost:3001/tracker/food`, {
+            method: "PATCH",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(foodData),
+        });
+        const updatedFoodExercise = await response.json();
+
+        dispatch(setFoodExercise({foodexercise: updatedFoodExercise}));
+    }
 
     return (
         <div className="ml-12 mb-10 bg-white h-72 w-4/5 md:w-3/5 lg:w-4/5 border border-black p-5 flex flex-col items-center rounded-xl">
@@ -24,9 +77,13 @@ export default function SubmitFood({food}) {
                         />
                         <p className="text-sm text-center"> servings of </p>
                         <label>
-                            <select className="p-3 w-24" name="selectedMeasure" value={measure} onChange={e => setMeasure(e.target.value)}>
+                            <select 
+                                className="p-3 w-24" 
+                                name="selectedMeasure"
+                                value={measure} 
+                                onChange={e => setMeasure(e.target.value)}>
                                 <option value="100g">100g</option>
-                                <option value="">{food.measure} ({food.grams}g)</option>
+                                <option value={food.measure}>{food.measure} ({food.grams}g)</option>
                             </select>
                         </label>
                     </div>
@@ -36,10 +93,10 @@ export default function SubmitFood({food}) {
                     <div className="mt-2">
                         {/*shadow shadow-inner shadow-xl shadow-black */}
                         <label className="p-3">
-                            <select name="selectedFruit" value={meal} onChange={e => setMeal(e.target.value)}>
-                                <option value="Breakfast">Breakfast</option>
-                                <option value="Lunch">Lunch</option>
-                                <option value="Dinner">Dinner</option>
+                            <select name="selectedMeal" value={meal} onChange={e => setMeal(e.target.value)}>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
                             </select>
                         </label>
                     </div>
@@ -53,7 +110,7 @@ export default function SubmitFood({food}) {
                         <h2> Calories: {food.calories} kcal </h2>
                     </div> 
                     <div className="flex justify-center mt-6">  
-                        <button className="bg-gray-400 p-3 rounded-xl text-white text-lg"> Add Food </button>
+                        <button onClick={handleSubmit} className="bg-gray-400 p-3 rounded-xl text-white text-lg"> Add Food </button>
                     </div> 
                 </div>
             </div>
