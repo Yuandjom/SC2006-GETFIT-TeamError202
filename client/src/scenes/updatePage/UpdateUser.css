@@ -42,7 +42,17 @@
 }
 
 
-input[type=updateProfileText] {
+input[type=updateText] {
+    width: 70%;
+    margin-left: 20px;
+    padding: 12px 20px;
+    border: 1px solid rgb(79, 79, 79);
+    border-radius: 8px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+input[type=number] {
     width: 70%;
     margin-left: 20px;
     padding: 12px 20px;
@@ -62,10 +72,19 @@ select {
     box-sizing: border-box;
 }
 
+.inputContainer {
+    position: relative;
+}
 
-
-
-
+.inputAdd {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-weight: bold;
+}
 
 .updateButton {
     position: absolute;

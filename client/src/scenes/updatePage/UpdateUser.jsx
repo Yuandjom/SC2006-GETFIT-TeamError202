@@ -29,6 +29,8 @@ function UpdateUser() {
 
   const [user, setUser] = useState();
   const [input, setInput] = useState("");
+
+
   //fetch your user id data
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${loggedInUserId}`, {
@@ -44,15 +46,46 @@ function UpdateUser() {
     console.log(user)
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onClickHandler = (e) => {
-    
-  }
+  // const onClickHandler = (e) => {
+  // }
+
   const handleChange = (e) => {
-    e.preventDefault();
-    setInput(e.target.value);
+    const { name, value } = e.target;
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
+    // setInput(e.target.value);
+    // setInput()
   }
+
+  // update the user data
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:3001/users/${loggedInUserId}`, {
+        // PUT
+        method: "PATCH",
+        headers: { Authorization: `Bearer ${token}` },
+
+        //update user
+        body: JSON.stringify(user)
+      });
+      if (response.ok) {
+        const updatedUser = await response.json();
+        setUser(updatedUser);
+        //debug tool
+        alert("User profile updated")
+      }
+      else {
+        alert("Failed to update")
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred")
+    }
+
+  }
+
   //mount it 
-  if(!user){
+  if (!user) {
     return ""
   }
 
@@ -60,46 +93,57 @@ function UpdateUser() {
 
     <Box>
       <Navbar />
-      <div className="updatePrompt">
-        <div className="updateBox">
-          <div className="updateTitle">
-            {/* EDIT INFORMATION */}
-            {user.firstName}
-          </div>
-          <div className="updateElement">
-            <div className="elementTitle">
-              USERNAME
+      <form onSubmit={handleSubmit}>
+        <div className="updatePrompt">
+          <div className="updateBox">
+            <div className="updateTitle">
+              EDIT INFORMATION
             </div>
-            <input type="updateProfileText" id="elementBox"></input>
-          </div>
-          <div className="updateElement">
-            <div className="elementTitle">
-              GENDER
+            <div className="updateElement">
+              <div className="elementTitle">
+                FIRST NAME
+              </div>
+              <input type="updateText" name="firstName" value={user.firstName} onChange={handleChange}></input>
             </div>
-            <select id="selectGender">
-              <option value="0"> Select Gender </option>
-              <option value="1"> Male </option>
-              <option value="2"> Female </option>
-            </select>
+            <div className="updateElement">
+              {/* <div className="elementTitle">
+                GENDER
+              </div>
+              <select id="selectGender">
+                <option value="0"> Select Gender </option>
+                <option value="1"> Male </option>
+                <option value="2"> Female </option>
+              </select> */}
+              <div className="elementTitle">
+                AGE
+              </div>
+              <input type="number" name="age" value={user.age} onChange={handleChange}></input>
 
-          </div>
-          <div className="updateElement">
-            <div className="elementTitle">
-              HEIGHT
             </div>
-            <input type="updateProfileText" id="elementBox"></input>
-          </div>
-          <div className="updateElement">
-            <div className="elementTitle">
-              WEIGHT
+            <div className="updateElement">
+              <div className="elementTitle">
+                HEIGHT
+              </div>
+              <div className="inputContainer">
+                <input type="number" name="height" value={user.height} onChange={handleChange}></input>
+                <span className="inputAdd"> CM </span>
+              </div>
             </div>
-            <input type="updateProfileText" id="elementBox"></input>
+            <div className="updateElement">
+              <div className="elementTitle">
+                WEIGHT
+              </div>
+              <div className="inputContainer">
+                <input type="number" name="weight" value={user.weight} onChange={handleChange}></input>
+                <span className="inputAdd"> KG </span>
+              </div>
+            </div>
+            <button className="updateButton" type="submit">
+              UPDATE
+            </button>
           </div>
-          <button className="updateButton">
-            UPDATE
-          </button>
         </div>
-      </div>
+      </form>
     </Box >
   )
 }
