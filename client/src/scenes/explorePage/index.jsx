@@ -41,6 +41,7 @@ function ExplorePage() {
     opening_hours: '', 
     vicinity: '',
     distance: '',
+    contact: ''
    });
 
    //access current location
@@ -133,7 +134,7 @@ function ExplorePage() {
               console.log(place); // detailed information about the place  
               openingHours = place.current_opening_hours ? place.current_opening_hours.weekday_text.join('\n') : 'Not Available'
               console.log(openingHours)
-              setPlaces({name : place.name, business_status: place.business_status, opening_hours: openingHours, vicinity: place.vicinity, distance: distance})
+              setPlaces({name : place.name, business_status: place.business_status, opening_hours: openingHours, vicinity: place.formatted_address, distance: distance, contact: place.formatted_phone_number})
         }
       })  
         
@@ -196,6 +197,8 @@ function ExplorePage() {
                             Distance: {places.distance} 
                             <br />
                             Vicinity: {places.vicinity}
+                            <br />
+                            Contact: {places.contact}
                           </Typography>
                         </CardContent>
                       </Card>
