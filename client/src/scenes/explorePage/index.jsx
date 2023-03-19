@@ -26,16 +26,16 @@ function ExplorePage() {
        libraries: ['places'],
    })
    const center = { lat: 1.3521, lng: 103.8198 }
-   const [map, setMap] = useState(/** @type google.maps.Map */(null))
+   //const [map, setMap] = useState(/** @type google.maps.Map */(null))
    const searchInput = useRef()
-
+   const mapRef = useRef()
 
    const [currentPosition, setCurrentPosition] = useState(null) //what i added
    const [nearbyPlaces, setNearbyPlaces] = useState([])
    const [searchRadius, setSearchRadius] = useState(0)
    const [markers, setMarkers] = useState([])
    const [selectedMarkers, setSelectedMarkers] = useState([])
-   const [place, setPlace] = useState({
+   const [places, setPlaces] = useState({
     name: '', 
     business_status: '', 
     opening_hours: '', 
@@ -110,9 +110,9 @@ function ExplorePage() {
    }
 
    const DisplayMarker = (place) => {
+        let openingHours = 'Not Available'
         // Create a DistanceMatrixService object
         const distanceService = new window.google.maps.DistanceMatrixService();
-
         // Call the distance matrix service to get the distance between the user's location and the place
         distanceService.getDistanceMatrix({
         origins: [currentPosition],
@@ -122,11 +122,20 @@ function ExplorePage() {
         }, (response, status) => {
           if (status === 'OK') {
         // Get the distance value from the response
-        const distance = response.rows[0].elements[0].distance.text;
-        const opening_hours = place.opening_hours ? JSON.stringify(place.opening_hours.weekday_text) : 'Not available'
-        setPlace({name : place.name, business_status: place.business_status, opening_hours: opening_hours, vicinity: place.vicinity, distance: distance
+        const distance = response.rows[0].elements[0].distance.text; 
+
+        console.log(place)
         
-        })
+        //get details
+        const service = new window.google.maps.places.PlacesService(document.createElement('div'));
+        service.getDetails({ placeId: place.place_id }, (place, status) => {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+              console.log(place); // detailed information about the place  
+              openingHours = place.current_opening_hours ? place.current_opening_hours.weekday_text.join('\n') : 'Not Available'
+              console.log(openingHours)
+              setPlaces({name : place.name, business_status: place.business_status, opening_hours: openingHours, vicinity: place.vicinity, distance: distance})
+        }
+      })  
         
     //     let sidePanel = document.getElementById('details-panel');
     //     sidePanel.innerHTML = `
@@ -175,18 +184,18 @@ function ExplorePage() {
                       <Card variant="outlined">
                         <CardContent>
                           <Typography variant="h5" gutterBottom>
-                            Name of location: {place.name}
+                            Name of location: {places.name}
                           </Typography>
                           <Typography sx={{ fontSize: 14 }}  component="div">
-                            Opening Status: {place.business_status}
+                            Opening Status: {places.business_status}
                           </Typography>
                           <Typography  sx={{ mb: 1.5 }} color="text.secondary">
-                            Opening Hours: {place.opening_hours}
+                            Opening Hours: {places.opening_hours}
                           </Typography>
                           <Typography variant="body1">
-                            Distance: {place.distance} 
+                            Distance: {places.distance} 
                             <br />
-                            Vicinity: {place.vicinity}
+                            Vicinity: {places.vicinity}
                           </Typography>
                         </CardContent>
                       </Card>
@@ -203,6 +212,8 @@ function ExplorePage() {
                    options={{
                        fullscreenControl: false
                    }}
+                   ref={mapRef}
+                   //onLoad = {onMapLoad}
                >
                    {currentPosition && <Marker position={currentPosition} />}
                    {nearbyPlaces.map(place => ( <Marker key={place.place_id} position={place.geometry.location} icon={{url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'}} onClick = {() => {DisplayMarker(place)}} />))}  {/* onClick={() => { setSelectedMarkers(place); }}*/}
