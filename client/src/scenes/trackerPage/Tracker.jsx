@@ -27,7 +27,15 @@ export default function Tracker() {
             },
         });
     const updatedFoodExercise = await response.json();
-    dispatch(setFoodExercise({foodexercise: updatedFoodExercise}));
+
+    const setState = (updatedFoodExercise, dispatch) => new Promise((resolve, reject) => {
+      // do anything here
+      dispatch(setFoodExercise({foodexercise: updatedFoodExercise}));
+      resolve();
+    })
+
+    await setState(updatedFoodExercise, dispatch);
+
   };
 
   useEffect(() => {
@@ -91,6 +99,7 @@ export default function Tracker() {
       />
       <ExerciseSection 
         name = "Exercise"
+        exercise = {foodExerciseArr.exercise}
       />
       </div>
     </div>

@@ -3,20 +3,22 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setFoodExercise } from "state";
 
-export default function ExerciseSection({name}) {
+export default function ExerciseSection({name, exercise}) {
+
+    console.log(exercise);
 
     const dispatch = useDispatch();
 
     const { _id } = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
     const date = useSelector((state) => state.date);
-    const foodexercise = useSelector((state) => state.foodexercise);
+    //const foodexercise = useSelector((state) => state.foodexercise);
     
     const [exerciseArr, setExerciseArr] = useState([]);
 
     useEffect(() => {
-        setExerciseArr(foodexercise.exercise);
-    }, [exerciseArr]);
+        setExerciseArr(exercise);
+    }, [exercise]);
 
     const deleteExercise = async (exercise) => {
         const response = await fetch(
@@ -33,7 +35,7 @@ export default function ExerciseSection({name}) {
         const updatedFoodExercise = await response.json();
         dispatch(setFoodExercise({ foodexercise: updatedFoodExercise }));
         
-        setExerciseArr(updatedFoodExercise);
+        //setExerciseArr(updatedFoodExercise);
     };
 
     return (
