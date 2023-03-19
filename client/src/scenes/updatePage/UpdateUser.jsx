@@ -17,7 +17,7 @@ import "./UpdateUser.css";
 // import Friend from "components/Friend";
 // import WidgetWrapper from "components/WidgetWrapper";
 import { useState, useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { setPost } from "state";
 
 
@@ -25,6 +25,7 @@ function UpdateUser() {
 
   //from your url link the id 
   const loggedInUserId = useSelector((state) => state.user._id);
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
 
   const [user, setUser] = useState({
@@ -43,14 +44,22 @@ function UpdateUser() {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    setUser(data);
+    setUser({
+      firstName: data.firstName, 
+      age: data.age, 
+      height: data.height, 
+      weight: data.weight
+    });
   };
 
   useEffect(() => {
     getUser();
     console.log(user)
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
+  //mount it 
+  if (!user) {
+    return ""
+  }
   // const onClickHandler = (e) => {
   // }
 
@@ -75,13 +84,15 @@ function UpdateUser() {
       });
   
         const updatedUser = await response.json();
-        setUser(updatedUser);
+        dispatch(setUser({ 
+          firstName: updatedUser.firstName, 
+          age: updatedUser.age,
+          weight: updatedUser.weight,
+          height: updatedUser.height,
+        }));
   }
 
-  //mount it 
-  if (!user) {
-    return ""
-  }
+
 
   return (
 

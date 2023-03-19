@@ -47,9 +47,21 @@ export const authSlice = createSlice({
     setFoodExercise: (state, action) => {
       state.foodexercise = action.payload.foodexercise;
     },
+    setUser: (state, action) => {
+      state.user = action.payload.user;
+    },
   },
 });
 
-export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost, setFoodExercise, setDate } =
-  authSlice.actions;
+export const {
+  setMode,
+  setLogin,
+  setLogout,
+  setFriends,
+  setPosts,
+  setPost,
+  setFoodExercise,
+  setDate,
+  setUser,
+} = authSlice.actions;
 export default authSlice.reducer;
