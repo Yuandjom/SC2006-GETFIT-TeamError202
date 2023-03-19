@@ -3,6 +3,7 @@ import {
   getUser,
   getUserFriends,
   addRemoveFriend,
+  updateUser,
 } from "../controllers/users.js";
 import { verifyToken } from "../middleware/auth.js";
 
@@ -21,6 +22,7 @@ const router = express.Router();
 router.get("/:id", verifyToken, getUser);
 //router.get("/:id", getUser)
 //http://localhost:3001/users/:id
+router.patch("/:id", verifyToken, updateUser);
 
 router.get("/:id/friends", verifyToken, getUserFriends);
 

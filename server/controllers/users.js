@@ -62,3 +62,23 @@ export const addRemoveFriend = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
+export const updateUser = async (req, res) => {
+  try {
+    //find from database (mongodb)
+    const { id } = req.params;
+    const { firstName, age, height, weight } = req.body;
+    if (!firstName && !age && !height && !weight) {
+      return res.status(422).json({ message: "invalid entity" });
+    }
+    const user = await User.findByIdAndUpdate(id, {
+      firstName,
+      age,
+      height,
+      weight,
+    });
+    res.status(200).json({ user });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};

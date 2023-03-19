@@ -27,7 +27,12 @@ function UpdateUser() {
   const loggedInUserId = useSelector((state) => state.user._id);
   const token = useSelector((state) => state.token);
 
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({
+    firstName: "",
+    age: "",
+    height: "", 
+    weight: "",
+  });
   const [input, setInput] = useState("");
 
 
@@ -58,8 +63,8 @@ function UpdateUser() {
 
   // update the user data
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
+      e.preventDefault();
+      console.log(user)
       const response = await fetch(`http://localhost:3001/users/${loggedInUserId}`, {
         // PUT
         method: "PATCH",
@@ -68,20 +73,9 @@ function UpdateUser() {
         //update user
         body: JSON.stringify(user)
       });
-      if (response.ok) {
+  
         const updatedUser = await response.json();
         setUser(updatedUser);
-        //debug tool
-        alert("User profile updated")
-      }
-      else {
-        alert("Failed to update")
-      }
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred")
-    }
-
   }
 
   //mount it 
