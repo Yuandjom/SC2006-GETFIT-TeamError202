@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, useMediaQuery } from "@mui/material";
 import Navbar from "scenes/navbar";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "./UpdateUser.css";
 
@@ -27,7 +27,7 @@ function UpdateUser() {
   const loggedInUserId = useSelector((state) => state.user._id);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
-
+  const navigate = useNavigate()
   const [user, setUser] = useState({
     firstName: "",
     age: "",
@@ -76,20 +76,26 @@ function UpdateUser() {
       console.log(user)
       const response = await fetch(`http://localhost:3001/users/${loggedInUserId}`, {
         // PUT
-        method: "PATCH",
-        headers: { Authorization: `Bearer ${token}` },
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` ,
+        "Content-Type": "application/json",
+      },
 
         //update user
-        body: JSON.stringify(user)
+        body: JSON.stringify({firstName: user.firstName, age: user.age, height: user.height, weight: user.weight})
       });
   
-        const updatedUser = await response.json();
-        dispatch(setUser({ 
-          firstName: updatedUser.firstName, 
-          age: updatedUser.age,
-          weight: updatedUser.weight,
-          height: updatedUser.height,
-        }));
+      const updatedUser = await response.json();
+      if(updatedUser){
+        // dispatch(setUser({ 
+        //   firstName: updatedUser.firstName, 
+        //   age: updatedUser.age,
+        //   weight: updatedUser.weight,
+        //   height: updatedUser.height,
+        // }));
+        navigate("/home");
+      }
+
   }
 
 

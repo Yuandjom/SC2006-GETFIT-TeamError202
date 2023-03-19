@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/:id", verifyToken, getUser);
 //router.get("/:id", getUser)
 //http://localhost:3001/users/:id
-router.patch("/:id", verifyToken, updateUser);
+router.put("/:id", verifyToken, updateUser);
 
 router.get("/:id/friends", verifyToken, getUserFriends);
 

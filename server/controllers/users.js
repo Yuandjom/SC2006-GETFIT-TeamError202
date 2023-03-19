@@ -68,16 +68,21 @@ export const updateUser = async (req, res) => {
     //find from database (mongodb)
     const { id } = req.params;
     const { firstName, age, height, weight } = req.body;
-    // if (!firstName && !age && !height && !weight) {
-    //   return res.status(422).json({ message: "invalid entity" });
-    // }
-    const user = await User.findByIdAndUpdate(id, {
-      firstName: firstName,
-      age: age,
-      height: height,
-      weight: weight,
-    });
-    res.status(200).json({ user });
+    // console.log(firstName, age, height, weight);
+    if (!firstName && !age && !height && !weight) {
+      return res.status(422).json({ message: "invalid entity" });
+    }
+    const user = await User.findByIdAndUpdate(
+      id,
+      {
+        firstName: firstName,
+        age: age,
+        height: height,
+        weight: weight,
+      },
+      { new: true }
+    );
+    res.status(200).json({ message: "successfull update" });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
