@@ -31,7 +31,7 @@ function UpdateUser() {
   const [user, setUser] = useState({
     firstName: "",
     age: "",
-    height: "", 
+    height: "",
     weight: "",
   });
   const [input, setInput] = useState("");
@@ -45,9 +45,9 @@ function UpdateUser() {
     });
     const data = await response.json();
     setUser({
-      firstName: data.firstName, 
-      age: data.age, 
-      height: data.height, 
+      firstName: data.firstName,
+      age: data.age,
+      height: data.height,
       weight: data.weight
     });
   };
@@ -72,29 +72,30 @@ function UpdateUser() {
 
   // update the user data
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log(user)
-      const response = await fetch(`http://localhost:3001/users/${loggedInUserId}`, {
-        // PUT
-        method: "PUT",
-        headers: { Authorization: `Bearer ${token}` ,
+    e.preventDefault();
+    console.log(user)
+    const response = await fetch(`http://localhost:3001/users/${loggedInUserId}`, {
+      // PUT
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
 
-        //update user
-        body: JSON.stringify({firstName: user.firstName, age: user.age, height: user.height, weight: user.weight})
-      });
-  
-      const updatedUser = await response.json();
-      if(updatedUser){
-        // dispatch(setUser({ 
-        //   firstName: updatedUser.firstName, 
-        //   age: updatedUser.age,
-        //   weight: updatedUser.weight,
-        //   height: updatedUser.height,
-        // }));
-        navigate("/home");
-      }
+      //update user
+      body: JSON.stringify({ firstName: user.firstName, age: user.age, height: user.height, weight: user.weight })
+    });
+
+    const updatedUser = await response.json();
+    if (updatedUser) {
+      // dispatch(setUser({ 
+      //   firstName: updatedUser.firstName, 
+      //   age: updatedUser.age,
+      //   weight: updatedUser.weight,
+      //   height: updatedUser.height,
+      // }));
+      navigate("/home");
+    }
 
   }
 
@@ -128,7 +129,7 @@ function UpdateUser() {
               <div className="elementTitle">
                 AGE
               </div>
-              <input type="number" name="age" value={user.age} onChange={handleChange}></input>
+              <input type="updateNumber" name="age" value={user.age} onChange={handleChange}></input>
 
             </div>
             <div className="updateElement">
@@ -136,7 +137,7 @@ function UpdateUser() {
                 HEIGHT
               </div>
               <div className="inputContainer">
-                <input type="number" name="height" value={user.height} onChange={handleChange}></input>
+                <input type="updateNumber" name="height" value={user.height} onChange={handleChange}></input>
                 <span className="inputAdd"> CM </span>
               </div>
             </div>
@@ -145,7 +146,7 @@ function UpdateUser() {
                 WEIGHT
               </div>
               <div className="inputContainer">
-                <input type="number" name="weight" value={user.weight} onChange={handleChange}></input>
+                <input type="updateNumber" name="weight" value={user.weight} onChange={handleChange}></input>
                 <span className="inputAdd"> KG </span>
               </div>
             </div>
