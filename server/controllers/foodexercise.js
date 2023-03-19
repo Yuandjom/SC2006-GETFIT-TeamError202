@@ -140,9 +140,6 @@ export const deleteExercise = async (req, res) => {
         
         const foodExercise = await FoodExercise.findOne({userId: userid, date: date});
 
-        console.log(name);
-        console.log(duration);
-
         for (let i=0; i<foodExercise.exercise.length; i++) {
             if (foodExercise.exercise[i].name === name && foodExercise.exercise[i].duration === duration) {
                 foodExercise.exercise.splice(i, 1);
@@ -165,12 +162,67 @@ export const deleteExercise = async (req, res) => {
         res.status(404).json({ message: err.message });
     }
 
+}
 
-    /*
-    const foodExercise = await FoodExercise.updateOne(
-        { userId: userid, date: date},
-        { $pull : {'exercise':""} }
-    )
-    */
+export const deleteFood = async (req, res) => {
+
+    try {
+
+        const {userid, date, name, meal, servings, measure} = req.body;
+        
+        const foodExercise = await FoodExercise.findOne({userId: userid, date: date});
+
+        let updatedFoodExercise;
+
+        switch(meal) {
+            case "breakfast":
+                for (let i=0; i<foodExercise.breakfast.length; i++) {
+                    if (foodExercise.breakfast[i].name === name && foodExercise.breakfast[i].servings === servings && foodExercise.breakfast[i].measure === measure) {
+                        foodExercise.breakfast.splice(i, 1);
+                        break;
+                    }
+                }
+                updatedFoodExercise = await FoodExercise.findOneAndUpdate(
+                    {userId: userid, date: date},
+                    {breakfast: foodExercise.breakfast},
+                    {new : true}
+                )
+                break;
+            case "lunch": 
+                for (let i=0; i<foodExercise.lunch.length; i++) {
+                    if (foodExercise.lunch[i].name === name && foodExercise.lunch[i].servings === servings && foodExercise.lunch[i].measure === measure) {
+                        foodExercise.lunch.splice(i, 1);
+                        break;
+                    }
+                }
+                updatedFoodExercise = await FoodExercise.findOneAndUpdate(
+                    {userId: userid, date: date},
+                    {lunch: foodExercise.lunch},
+                    {new : true}
+                )
+                break;
+            case "dinner":
+                for (let i=0; i<foodExercise.dinner.length; i++) {
+                    if (foodExercise.dinner[i].name === name && foodExercise.dinner[i].servings === servings && foodExercise.dinner[i].measure === measure) {
+                        foodExercise.dinner.splice(i, 1);
+                        break;
+                    }
+                }
+                updatedFoodExercise = await FoodExercise.findOneAndUpdate(
+                    {userId: userid, date: date},
+                    {dinner: foodExercise.dinner},
+                    {new : true}
+                )
+                break;
+            default: 
+                break;
+        }
+
+        res.status(200).json(updatedFoodExercise);
+
+    } catch (err) {
+        console.log("error here");
+        res.status(404).json({ message: err.message });
+    }
 
 }
