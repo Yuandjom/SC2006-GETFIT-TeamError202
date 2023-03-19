@@ -91,7 +91,7 @@ export default function Tracker() {
       />
       <ExerciseSection 
         name = "Exercise"
-        exercise = {foodExerciseArr.exercise}/>
+      />
       </div>
     </div>
   )

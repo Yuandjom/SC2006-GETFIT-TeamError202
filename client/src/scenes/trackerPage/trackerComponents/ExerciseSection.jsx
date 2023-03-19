@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setFoodExercise, setDate } from "state";
+import { setFoodExercise } from "state";
 
-export default function ExerciseSection({name, exercise}) {
+export default function ExerciseSection({name}) {
 
     const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ export default function ExerciseSection({name, exercise}) {
 
     useEffect(() => {
         setExerciseArr(foodexercise.exercise);
-    }, [exercise]);
+    }, [exerciseArr]);
 
     const deleteExercise = async (exercise) => {
         const response = await fetch(
