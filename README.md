@@ -10,6 +10,24 @@ Website link:
 - [Technologies](#technologies)
 - [Contributors](#contributors)
 
+## Getting started
+
+Open two terminals in the command line
+```
+../cd client 
+```
+install the dependencies 
+```
+npm i
+```
+Open the second terminal 
+```
+../cd server
+```
+install the dependencies 
+```
+npm i
+```
 
 ## Introduction[![](./README_docsAndimages/pin.svg)](#introduction)
 
