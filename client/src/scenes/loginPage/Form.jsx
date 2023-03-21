@@ -4,10 +4,10 @@ import {
   Button,
   TextField,
   FormLabel,
-  useMediaQuery,
   Typography,
   useTheme,
 } from "@mui/material";
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';

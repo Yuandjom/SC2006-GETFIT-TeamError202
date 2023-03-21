@@ -200,12 +200,22 @@ const Navbar = () => {
                 <MenuItem value={fullName}>
                   <Typography>{fullName}</Typography>
                 </MenuItem>
-                <MenuItem onClick={() => dispatch(setLogout())}>
-                  Log Out
-                </MenuItem>
                 <MenuItem onClick={() => navigate('/explore')}>
                   Explore
                 </MenuItem>
+                <MenuItem onClick={() => navigate('/home')}>
+                  Home
+                </MenuItem>
+                <MenuItem onClick={() => navigate('/tracker')}>
+                  Tracker
+                </MenuItem>
+                <MenuItem onClick={() => navigate('/findFriends')}>
+                  Find Friends
+                </MenuItem>
+                <MenuItem onClick={() => dispatch(setLogout())}>
+                  Log Out
+                </MenuItem>
+
               </Select>
             </FormControl>
           </FlexBetween>
