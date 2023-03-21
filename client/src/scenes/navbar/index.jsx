@@ -61,35 +61,11 @@ const Navbar = () => {
         >
           GETFIT
         </Typography>
-        {/* comment out the search bar 
-        {isNonMobileScreens && (
-          <FlexBetween
-            backgroundColor={neutralLight}
-            borderRadius="9px"
-            gap="3rem"
-            padding="0.1rem 1.5rem"
-          >
-            <InputBase placeholder="Search..." />
-            <IconButton>
-              <Search />
-            </IconButton>
-          </FlexBetween>
-        )} */}
       </FlexBetween>
 
       {/* DESKTOP NAV */}
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
-          {/* 
-          This is to disable the dark and light mode icon
-
-          <IconButton onClick={() => dispatch(setMode())}> 
-            {theme.palette.mode === "dark" ? (
-              <DarkMode sx={{ fontSize: "25px" }} />
-            ) : (
-              <LightMode sx={{ color: dark, fontSize: "25px" }} />
-            )}
-          </IconButton>*/}
           <Stack direction="row" spacing={1}>
             <Button color='inherit' onClick={() => navigate("/home")} >Home</Button>
             <Button color='inherit' onClick={() => navigate("/explore")} >Explore</Button>
@@ -97,10 +73,6 @@ const Navbar = () => {
             <Button color='inherit' onClick={() => navigate("/findFriends")} >Find Friends</Button>
             <Button color='inherit' onClick={() => navigate(`/profile/${_id}`)} >Profile</Button>
           </Stack>
-          {/* <Message sx={{ fontSize: "25px" }} />
-          <Notifications sx={{ fontSize: "25px" }} />
-          <Help sx={{ fontSize: "25px" }} /> */}
-          {/**useparams for this? */}
           <FormControl variant="standard" value={fullName}>
             <Select
               value={fullName}
@@ -119,9 +91,6 @@ const Navbar = () => {
               }}
               input={<InputBase />}
             >
-              {/* <MenuItem onClick={() => navigate("/home")}>Home</MenuItem>
-              <MenuItem onClick={() => navigate("/explore")}>Explore</MenuItem>
-              <MenuItem onClick={() => navigate("/tracker")}>Fitness Tracker</MenuItem> */}
               <MenuItem value={fullName} onClick={() => navigate(`/profile/${_id}`)}>
                 <Typography>{fullName}</Typography>
               </MenuItem>
