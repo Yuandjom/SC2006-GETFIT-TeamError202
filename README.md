@@ -11,6 +11,9 @@ Website link:
 - [Contributors](#contributors)
 
 ## Getting started
+Add .env file in client and server
+
+(to be added)
 
 Open two terminals in the command line
 ```
@@ -28,6 +31,22 @@ install the dependencies
 ```
 npm i
 ```
+
+on ../server
+```
+npm start
+```
+
+on ../client
+```
+npm start
+```
+
+Afterwards use 
+Email: testing123@gmail.com
+Password: testing123@gmail.com
+
+if this email and password cant be used, please register a new account
 
 ## Introduction[![](./README_docsAndimages/pin.svg)](#introduction)
 
