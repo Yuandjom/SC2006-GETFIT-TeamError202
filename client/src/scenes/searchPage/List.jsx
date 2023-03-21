@@ -12,7 +12,7 @@ export default function List() {
     };
 
     //create a new array by filtering the original array
-     filteredData = 
+    // filteredData = 
     
     data.map((el) => {
         //if no input the return the original
@@ -35,11 +35,11 @@ export default function List() {
             value = {inputText}
             label="Search"
             onChange={inputHandler} />
-            <ul>
+            {/* <ul>
                 {filteredData.map((item) => (
                     <li key={item.id}>{item.text}</li>
                 ))}
-            </ul>
+            </ul> */}
         </div>
     )
 
