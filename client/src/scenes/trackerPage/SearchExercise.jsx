@@ -28,6 +28,7 @@ export default function SearchExercise() {
         setChosenExercise({});
 
         const {REACT_APP_EXERCISE_API_KEY} = process.env;
+        console.log(REACT_APP_EXERCISE_API_KEY)
 
         const options = {
             method: 'GET',
