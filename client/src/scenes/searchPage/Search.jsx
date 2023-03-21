@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import UserWidget from "scenes/widgets/UserWidget";
+import List from "./List";
 
 function Search() {
     
@@ -51,6 +52,7 @@ function Search() {
         >
           <Box justifyContent={'center'}>
             <Typography fontSize={20}> Find Friends </Typography>
+            {/*<List />*/}
           </Box>
           <Box m="2rem 0" />
           {/* <PostsWidget userId={userId} isProfile /> */}
