@@ -3,29 +3,15 @@ import { Box, useMediaQuery } from "@mui/material";
 import Navbar from "scenes/navbar";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-
 import "./UpdateUser.css";
-
-// import {
-//   ChatBubbleOutlineOutlined,
-//   FavoriteBorderOutlined,
-//   FavoriteOutlined,
-//   ShareOutlined,
-// } from "@mui/icons-material";
-// import { Divider, IconButton, Typography, useTheme } from "@mui/material";
-// import FlexBetween from "components/FlexBetween";
-// import Friend from "components/Friend";
-// import WidgetWrapper from "components/WidgetWrapper";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-// import { setPost } from "state";
+
 
 
 function UpdateUser() {
 
   //from your url link the id 
   const loggedInUserId = useSelector((state) => state.user._id);
-  const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const navigate = useNavigate()
   const [user, setUser] = useState({
@@ -34,7 +20,6 @@ function UpdateUser() {
     height: "",
     weight: "",
   });
-  const [input, setInput] = useState("");
 
 
   //fetch your user id data
@@ -60,14 +45,10 @@ function UpdateUser() {
   if (!user) {
     return ""
   }
-  // const onClickHandler = (e) => {
-  // }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
-    // setInput(e.target.value);
-    // setInput()
   }
 
   // update the user data
@@ -88,12 +69,6 @@ function UpdateUser() {
 
     const updatedUser = await response.json();
     if (updatedUser) {
-      // dispatch(setUser({ 
-      //   firstName: updatedUser.firstName, 
-      //   age: updatedUser.age,
-      //   weight: updatedUser.weight,
-      //   height: updatedUser.height,
-      // }));
       navigate("/home");
     }
 
@@ -118,14 +93,6 @@ function UpdateUser() {
               <input type="updateText" name="firstName" value={user.firstName} onChange={handleChange}></input>
             </div>
             <div className="updateElement">
-              {/* <div className="elementTitle">
-                GENDER
-              </div>
-              <select id="selectGender">
-                <option value="0"> Select Gender </option>
-                <option value="1"> Male </option>
-                <option value="2"> Female </option>
-              </select> */}
               <div className="elementTitle">
                 AGE
               </div>

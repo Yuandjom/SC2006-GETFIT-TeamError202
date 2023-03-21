@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from 'scenes/navbar'
 import "./explore.css";
-import map from "./map.png"
 import {
    useJsApiLoader,
    GoogleMap,
@@ -202,31 +201,9 @@ function ExplorePage() {
                >
                    {currentPosition && <Marker position={currentPosition} />}
                    {nearbyPlaces.map(place => ( <Marker key={place.place_id} position={place.geometry.location} icon={{url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'}} onClick = {() => {DisplayMarker(place)}} />))}  {/* onClick={() => { setSelectedMarkers(place); }}*/}
-                   {/*selectedMarkers? 
-                   (<InfoWindow position={{lat: selectedMarkers.lat, lng: selectedMarkers.lng}}> 
-                        <div>
-                            <p>Gym Spotted!</p>
-                        </div>
-                   </InfoWindow>): null*/}
-                   {/*<Circle center = {currentPosition} radius = {searchRadius} strokeOpacity= '0.5' strokeWeight= '2' clickable= 'false' draggable= 'false' editable= 'false' visible= 'true' zIndex= '3' fillOpacity= '0.05' strokeColor= '#8BC34A' fillColor= "#8BC34A" />*/}
+        
                 </GoogleMap>
 
-                {/*<div className = 'display-details'>
-                    <h2>Location details: </h2>
-                    <sidePanel />
-                </div>*/}
-
-               {/*<div className='location-details' >
-                   <h2></h2>
-                   <div className="details-container">
-                       <h3>Gym and Fitness Center</h3>
-                       <p>Distance: 1.2km</p>
-                       <p>Timings:
-                           Sunday 8am - 10pm
-                           Rest of the week 7am - 10pm
-                       </p>
-                       <p>Website: www.activesg.com</p>
-                </div>*/ }
            </div>
        </div>
    )
