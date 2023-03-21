@@ -36,7 +36,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     } else {
       getPosts();
     } //add the post here to make it render like mad
-  }, [dispatch]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [dispatch, posts]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

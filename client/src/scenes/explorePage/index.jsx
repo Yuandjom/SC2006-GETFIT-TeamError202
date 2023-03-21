@@ -7,17 +7,9 @@ import {
    GoogleMap,
    Marker,
    Autocomplete,
-   Circle,
-   useLoadScript,
-   DirectionsRenderer,
-   StreetViewPanorama,
-   StreetViewService,
-   InfoWindow,
 } from '@react-google-maps/api'
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useRef, useState} from 'react'
 import { Box, Typography, CardContent, Card } from '@mui/material';
-import { Place } from '@mui/icons-material';
-import { current } from '@reduxjs/toolkit';
 
 function ExplorePage() {
    const { isLoaded } = useJsApiLoader({
@@ -25,7 +17,6 @@ function ExplorePage() {
        googleMapsApiKey: "AIzaSyBDZjux3Ro6hPFyqTxKdG7Y6_fkOpeKEFY",
        libraries: ['places'],
    })
-   const center = { lat: 1.3521, lng: 103.8198 }
    //const [map, setMap] = useState(/** @type google.maps.Map */(null))
    const searchInput = useRef()
    const mapRef = useRef()
@@ -138,14 +129,6 @@ function ExplorePage() {
         }
       })  
         
-    //     let sidePanel = document.getElementById('details-panel');
-    //     sidePanel.innerHTML = `
-    //     <p><strong>Name:  </strong>${place.name}</p>
-    //     <p><strong>Business Status:  </strong>${place.business_status}</p>
-    //     <p><strong>Opening Hours: </strong>${place.opening_hours ? JSON.stringify(place.opening_hours.weekday_text) : 'Not available'}</p>
-    //     <p><strong>Address:  </strong>${place.vicinity}</p>
-    //     <p><strong>Distance:</strong> ${distance}</p>
-    // `;
   } else {
     console.error('Error getting distance: ', status);
   }
