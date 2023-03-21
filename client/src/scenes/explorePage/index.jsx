@@ -10,6 +10,7 @@ import {
 } from '@react-google-maps/api'
 import { useRef, useState} from 'react'
 import { Box, Typography, CardContent, Card } from '@mui/material';
+import Spinner from 'components/Spinner';
 
 function ExplorePage() {
    const { isLoaded } = useJsApiLoader({
@@ -96,9 +97,7 @@ function ExplorePage() {
   };
 
    if (!isLoaded) {
-       return (<Typography>
-           Not loaded
-       </Typography>)
+       return <Spinner></Spinner>
    }
 
    const DisplayMarker = (place) => {
