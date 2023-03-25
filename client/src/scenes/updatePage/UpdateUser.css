@@ -1,12 +1,15 @@
 .updatePrompt {
     width: 40%;
     height: 65%;
+    min-width: 600px;
+    min-height: 600px;
     background-color: white;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 16px;
+
 }
 
 .updateBox {
