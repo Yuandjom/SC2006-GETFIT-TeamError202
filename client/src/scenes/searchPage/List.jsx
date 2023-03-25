@@ -1,7 +1,6 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import data from "../../components/List";
-import "./List.css";
 
 export default function List() {
 
