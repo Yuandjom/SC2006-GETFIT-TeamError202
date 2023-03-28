@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Navbar from "scenes/navbar";
 import SubmitFood from "./trackerComponents/SubmitFood";
+import Spinner from "../../components/Spinner";
+import fetch from "node-fetch";
 
 export default function SearchFood() {
 
@@ -8,6 +10,7 @@ export default function SearchFood() {
     const [foodData, setFoodData] = useState([]);
 
     const [chosenFood, setChosenFood] = useState({});
+    const [ready, setReady] = useState(false);
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -29,10 +32,11 @@ export default function SearchFood() {
 
         setFoodData([]);
         setChosenFood({});
+        setReady(true);
 
         //call API
-        let {REACT_APP_FOOD_API_KEY} = process.env;
-        REACT_APP_FOOD_API_KEY = REACT_APP_FOOD_API_KEY.replace(/'/g,'');
+        const {REACT_APP_FOOD_API_KEY} = process.env;
+        //REACT_APP_FOOD_API_KEY = REACT_APP_FOOD_API_KEY.replace(/'/g,'');
         console.log(REACT_APP_FOOD_API_KEY)
         //Survey (FNDDS)
         const params = {
@@ -41,8 +45,9 @@ export default function SearchFood() {
                 dataType: ["Survey (FNDDS)"],
                 pagesize: 20,
         }
-        const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(params.api_key)}&query=${encodeURIComponent(params.query)}&dataType=${encodeURIComponent(params.dataType)}&pageSize=${encodeURIComponent(params.pagesize)}`
 
+        const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(params.api_key)}&query=${encodeURIComponent(params.query)}&dataType=${encodeURIComponent(params.dataType)}&pageSize=${encodeURIComponent(params.pagesize)}`
+        
         function getData() {
             return fetch(api_url)
             .then(response => response.json())
@@ -84,12 +89,17 @@ export default function SearchFood() {
                 grams: measure.gramWeight,
             }
             setFoodData(oldArray => [...oldArray, foodInfo]);
+
+            setReady(false);
         })})
+        
+
     }
 
     return (
         <div>
             <Navbar />
+            {(ready) && <Spinner/>}
             <div className="mt-10 ml-10 mb-5 flex gap-4">
                 <input 
                 className="px-4 h-12 w-4/5 md:w-3/5 lg:w-2/5"
