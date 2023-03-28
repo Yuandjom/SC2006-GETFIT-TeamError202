@@ -18,6 +18,36 @@ export default function Tracker() {
   const date = useSelector((state) => state.date);
   const foodExerciseArr = useSelector((state) => state.foodexercise);
 
+  const [foodCalories, setFoodCalories] = useState(0);
+
+  const [deleteItem, setDeleteItem] = useState(false);
+
+
+  //get meal array in 
+  const calFoodCalories = (foodArrays) => {
+
+    let foodcalories = 0;
+    let i = 0;
+
+    for (i=0; i<foodArrays.breakfast.length; i++) {
+      let curFood = foodArrays.breakfast[i];
+      foodcalories += parseInt(curFood.calories);
+    }
+
+    for (i=0; i<foodArrays.lunch.length; i++) {
+      let curFood = foodArrays.lunch[i];
+      foodcalories += parseInt(curFood.calories);
+    }
+
+    for (i=0; i<foodArrays.dinner.length; i++) {
+      let curFood = foodArrays.dinner[i];
+      foodcalories += parseInt(curFood.calories);
+    }
+
+    console.log(foodcalories);
+    return foodcalories;
+  }
+
   const getFoodExerciseDoc  = async() => {
     const response = await fetch(`http://localhost:3001/tracker?userid=${_id}&date=${date.startDate}`, {
             method: "GET",
@@ -36,13 +66,17 @@ export default function Tracker() {
 
     await setState(updatedFoodExercise, dispatch);
 
+    console.log(foodExerciseArr);
+    const foodcalories = calFoodCalories(updatedFoodExercise);
+    setFoodCalories(foodcalories);
+
   };
 
   useEffect(() => {
 
     getFoodExerciseDoc();
     
-  }, [date]);
+  }, [date, deleteItem]);
 
   const handleDate = async (updatedDate) => {
     
@@ -75,7 +109,7 @@ export default function Tracker() {
         <div className="flex gap-5 justify-center mt-2">
           <h2> 3000 (Target) </h2>
           <h2> - </h2>
-          <h2> 500 (Food) </h2>
+          <h2> {foodCalories} (Food) </h2>
           <h2> + </h2>
           <h2> 0 (Exercise) </h2>
           <h2> = </h2>
@@ -88,14 +122,17 @@ export default function Tracker() {
       <FoodSection 
         name = "Breakfast"
         food = {foodExerciseArr.breakfast}
+        deleteItem = {setDeleteItem}
       />
       <FoodSection 
         name = "Lunch"
         food = {foodExerciseArr.lunch}
+        deleteItem = {setDeleteItem}
       />
       <FoodSection 
         name = "Dinner"
         food = {foodExerciseArr.dinner}
+        deleteItem = {setDeleteItem}
       />
       <ExerciseSection 
         name = "Exercise"
