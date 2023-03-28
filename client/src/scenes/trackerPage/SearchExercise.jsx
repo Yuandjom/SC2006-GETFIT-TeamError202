@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import Navbar from "scenes/navbar";
 import fetch from "node-fetch";
 import { useState } from "react";
+import Spinner from "../../components/Spinner";
 import SubmitExercise from "./trackerComponents/SubmitExercise";
 
 export default function SearchExercise() {
 
     const [input, setInput] = useState("");
     const [exerciseData, setExerciseData] = useState([]);
+    const [ready, setReady] = useState(false);
     
     const [chosenExercise, setChosenExercise] = useState({});
 
@@ -26,11 +28,13 @@ export default function SearchExercise() {
 
         setExerciseData([]);
         setChosenExercise({});
+        setReady(true);
 
         const {REACT_APP_EXERCISE_API_KEY} = process.env;
         console.log(REACT_APP_EXERCISE_API_KEY)
 
         const options = {
+            //mode: 'no-cors',
             method: 'GET',
             headers: {
                 'x-api-key': REACT_APP_EXERCISE_API_KEY
@@ -49,11 +53,14 @@ export default function SearchExercise() {
             }
             setExerciseData(oldArray => [...oldArray, exerciseInfo]);
         })
+
+        setReady(false);
     }
 
     return (
         <div>
             <Navbar />
+            {(ready) && <Spinner />}
             <div className="mt-10 ml-10 mb-5 flex gap-4">
                 <input 
                 className="px-4 h-12 w-4/5 md:w-3/5 lg:w-2/5"
@@ -67,7 +74,7 @@ export default function SearchExercise() {
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </button>
-            </div>
+            </div>        
             <div className="grid grid-cols-1 lg:grid-cols-2"> 
             
                 <div> 
