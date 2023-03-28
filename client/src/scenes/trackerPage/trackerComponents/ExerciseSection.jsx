@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setFoodExercise } from "state";
 
-export default function ExerciseSection({name, exercise}) {
+export default function ExerciseSection({name, exercise, deleteItem}) {
 
     console.log(exercise);
 
@@ -34,6 +34,8 @@ export default function ExerciseSection({name, exercise}) {
         );
         const updatedFoodExercise = await response.json();
         dispatch(setFoodExercise({ foodexercise: updatedFoodExercise }));
+
+        deleteItem(true);
         
         //setExerciseArr(updatedFoodExercise);
     };
