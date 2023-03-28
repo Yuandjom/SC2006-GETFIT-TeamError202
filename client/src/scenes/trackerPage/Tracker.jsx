@@ -19,6 +19,7 @@ export default function Tracker() {
   const foodExerciseArr = useSelector((state) => state.foodexercise);
 
   const [foodCalories, setFoodCalories] = useState(0);
+  const [exerciseCalories, setExerciseCalories] = useState(0);
 
   const [deleteItem, setDeleteItem] = useState(false);
 
@@ -44,8 +45,20 @@ export default function Tracker() {
       foodcalories += parseInt(curFood.calories);
     }
 
-    console.log(foodcalories);
     return foodcalories;
+  }
+
+  const calExerciseCalories = (exerciseArray) => {
+
+    let exercisecalories = 0;
+
+    for (let i=0; i<exerciseArray.length; i++) {
+      let curExercise = exerciseArray[i];
+      exercisecalories += parseInt(curExercise.calories);
+    }
+
+    //console.log(exerisecalories);
+    return exercisecalories;
   }
 
   const getFoodExerciseDoc  = async() => {
@@ -66,9 +79,10 @@ export default function Tracker() {
 
     await setState(updatedFoodExercise, dispatch);
 
-    console.log(foodExerciseArr);
     const foodcalories = calFoodCalories(updatedFoodExercise);
     setFoodCalories(foodcalories);
+    const exercisecalories = calExerciseCalories(updatedFoodExercise.exercise);
+    setExerciseCalories(exercisecalories);
 
   };
 
@@ -111,7 +125,7 @@ export default function Tracker() {
           <h2> - </h2>
           <h2> {foodCalories} (Food) </h2>
           <h2> + </h2>
-          <h2> 0 (Exercise) </h2>
+          <h2> {exerciseCalories} (Exercise) </h2>
           <h2> = </h2>
           <h2> 2500 </h2>
         </div>
@@ -137,6 +151,7 @@ export default function Tracker() {
       <ExerciseSection 
         name = "Exercise"
         exercise = {foodExerciseArr.exercise}
+        deleteItem = {setDeleteItem}
       />
       </div>
     </div>
