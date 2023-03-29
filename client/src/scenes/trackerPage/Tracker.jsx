@@ -13,16 +13,37 @@ export default function Tracker() {
 
   const dispatch = useDispatch();
 
-  const { _id } = useSelector((state) => state.user);
+  const { _id, age, height, gender, weight } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const date = useSelector((state) => state.date);
   const foodExerciseArr = useSelector((state) => state.foodexercise);
 
   const [foodCalories, setFoodCalories] = useState(0);
   const [exerciseCalories, setExerciseCalories] = useState(0);
+  const [targetCalories, setTargetCalories] = useState(0);
+  const [remainingCalories, setRemainingCalories] = useState(0);
+
 
   const [deleteItem, setDeleteItem] = useState(false);
 
+  const calTargetCalories = () => {
+    //for women: BMR = 655 + (9.6 × body weight in kg) + (1.8 × body height in cm) - (4.7 × age in years);
+    //for men: BMR = 66 + (13.7 × weight in kg) + (5 × height in cm) - (6.8 × age in years). 
+
+    let targetcalories;
+
+    if (gender === "Male") {
+      targetcalories = 66 + 13.7*weight + 5*height - 6.8*age;
+    }
+    
+    else {
+      targetcalories = 655 + 9.6*weight + 1.8*height - 4.7*age;
+    }
+
+    console.log(targetcalories);
+
+    return Math.round(targetcalories);
+  }
 
   //get meal array in 
   const calFoodCalories = (foodArrays) => {
@@ -79,10 +100,14 @@ export default function Tracker() {
 
     await setState(updatedFoodExercise, dispatch);
 
+    const targetcalories = calTargetCalories();
+    setTargetCalories(targetcalories);
     const foodcalories = calFoodCalories(updatedFoodExercise);
     setFoodCalories(foodcalories);
     const exercisecalories = calExerciseCalories(updatedFoodExercise.exercise);
     setExerciseCalories(exercisecalories);
+    const remainingcalories = targetcalories - foodcalories + exercisecalories;
+    setRemainingCalories(remainingcalories);
 
   };
 
@@ -121,13 +146,13 @@ export default function Tracker() {
       <div className="mt-8 bg-gray-200 mx-10 px-5 py-5 rounded-xl">
         <h1 className="text-2xl font-bold"> Calories Remaining </h1>
         <div className="flex gap-5 justify-center mt-2">
-          <h2> 3000 (Target) </h2>
+          <h2> {targetCalories} (Target) </h2>
           <h2> - </h2>
           <h2> {foodCalories} (Food) </h2>
           <h2> + </h2>
           <h2> {exerciseCalories} (Exercise) </h2>
           <h2> = </h2>
-          <h2> 2500 </h2>
+          <h2> {remainingCalories} </h2>
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2">
