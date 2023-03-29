@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFoodExercise } from "state";
+import Modal from "./Popup";
 
 export default function SubmitFood({food}) {
 
@@ -15,6 +16,7 @@ export default function SubmitFood({food}) {
     const [meal, setMeal] = useState("breakfast");
     const [measure, setMeasure] = useState('100g');
 
+    const [show, setShow] = useState(false);
 
     //after submit --> post
     const handleSubmit = async () => {
@@ -56,11 +58,18 @@ export default function SubmitFood({food}) {
         const updatedFoodExercise = await response.json();
 
         dispatch(setFoodExercise({foodexercise: updatedFoodExercise}));
+
+        setShow(true);
     }
 
     return (
-        <div className="ml-12 mb-10 bg-white h-72 w-4/5 md:w-3/5 lg:w-4/5 border border-black p-5 flex flex-col items-center rounded-xl">
-            
+        <div> 
+            <Modal 
+                onClose={() => setShow(false)} 
+                show={show} 
+                name="Food"
+            />
+            <div className="ml-12 mb-10 bg-white h-72 w-4/5 md:w-3/5 lg:w-4/5 border border-black p-5 flex flex-col items-center rounded-xl">
             <h2 className="text-xl font-bold"> {food.name} </h2>
             <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col items-center">
@@ -115,5 +124,7 @@ export default function SubmitFood({food}) {
             </div>
             
         </div>
+        </div>
+        
     )
 }

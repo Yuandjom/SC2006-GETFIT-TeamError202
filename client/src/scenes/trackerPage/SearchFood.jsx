@@ -36,9 +36,9 @@ export default function SearchFood() {
 
         //call API
         const {REACT_APP_FOOD_API_KEY} = process.env;
-        //REACT_APP_FOOD_API_KEY = REACT_APP_FOOD_API_KEY.replace(/'/g,'');
+        REACT_APP_FOOD_API_KEY = REACT_APP_FOOD_API_KEY.replace(/'/g,'');
         console.log(REACT_APP_FOOD_API_KEY)
-        //Survey (FNDDS)
+
         const params = {
                 api_key: REACT_APP_FOOD_API_KEY,
                 query: input,
@@ -92,8 +92,6 @@ export default function SearchFood() {
 
             setReady(false);
         })})
-        
-
     }
 
     return (
