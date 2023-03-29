@@ -76,8 +76,8 @@ export const getFoodExercise = async (req, res) => {
         const userid = req.query.userid;
         const date = req.query.date;
 
-        console.log(userid);
-        console.log(date);
+        //console.log(userid);
+        //console.log(date);
 
         //get the doc
         const foodExerciseCount = await FoodExercise.find({userId: userid, date: date}).count();
@@ -225,4 +225,27 @@ export const deleteFood = async (req, res) => {
         res.status(404).json({ message: err.message });
     }
 
+}
+
+export const searchExercise = async (req, res) => {
+
+    const apikey = process.env.EXERCISE_API_KEY;
+    const input = req.query.input;
+
+    console.log(apikey);
+    console.log(input);
+    
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-api-key': apikey,
+        },
+    };
+
+    const url = 'https://api.api-ninjas.com/v1/caloriesburned?activity=' + input
+
+    const response = await fetch(url, options);
+    const jsonResponse = await response.json();
+    res.json(jsonResponse);
+    
 }

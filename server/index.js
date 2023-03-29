@@ -61,6 +61,8 @@ app.use("/posts", postRoutes);
 //http://localhost:3001/posts
 app.use("/tracker", foodexerciseRoutes);
 
+//get exercise calories from ninja api
+
 
 /* MONGOOSE SETUP */
 // localhost:3001/
