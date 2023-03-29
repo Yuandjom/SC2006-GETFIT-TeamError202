@@ -12,6 +12,8 @@ export default function SearchFood() {
     const [chosenFood, setChosenFood] = useState({});
     const [ready, setReady] = useState(false);
 
+    const [empty, setEmpty] = useState(false);
+
     const handleChange = (e) => {
         e.preventDefault();
         setInput(e.target.value);
@@ -33,11 +35,11 @@ export default function SearchFood() {
         setFoodData([]);
         setChosenFood({});
         setReady(true);
+        setEmpty(false);
 
         //call API
         let {REACT_APP_FOOD_API_KEY} = process.env;
         REACT_APP_FOOD_API_KEY = REACT_APP_FOOD_API_KEY.replace(/'/g,'');
-        console.log(REACT_APP_FOOD_API_KEY)
 
         const params = {
                 api_key: REACT_APP_FOOD_API_KEY,
@@ -54,45 +56,54 @@ export default function SearchFood() {
         }
 
         getData().then(data => {
-            console.log(data);
-            data.foods.map(food => {
-            //nutrients is an array 
-            const nutrients = food.foodNutrients;
-            //get measurements array 
-            const measuresArr = food.foodMeasures;
+            //console.log("data");
+            console.log(data.foods);
 
-            var measure;
-
-            //get lowest rank 
-            var min = Math.min(...measuresArr.map(item => item.rank));
-            console.log(min);
-
-            for (let i=0; i<measuresArr.length; i++) {
-                if (measuresArr[i].rank === min) {
-                    measure = measuresArr[i];
-                    break;
-                }
+            if (data.foods.length == 0) {
+                setEmpty(true);
             }
-            //console.log(measuresArr);
-            //console.log(measure);
 
-            //calculate calories 
-            const calories = calCalories(nutrients[0].value, nutrients[1].value, nutrients[2].value);
-            //need to store foods info in an array 
-            const foodInfo = {
-                name: food.description,
-                protein: nutrients[0].value,
-                lipids: nutrients[1].value,
-                carbohydrates: nutrients[2].value,
-                calories: calories,
-                measure: measure.disseminationText,
-                grams: measure.gramWeight,
+            else {
+                data.foods.map(food => {
+                    //nutrients is an array 
+                    const nutrients = food.foodNutrients;
+                    //get measurements array 
+                    const measuresArr = food.foodMeasures;
+        
+                    var measure;
+        
+                    //get lowest rank 
+                    var min = Math.min(...measuresArr.map(item => item.rank));
+                    console.log(min);
+        
+                    for (let i=0; i<measuresArr.length; i++) {
+                        if (measuresArr[i].rank === min) {
+                            measure = measuresArr[i];
+                            break;
+                        }
+                    }
+        
+                    //calculate calories 
+                    const calories = calCalories(nutrients[0].value, nutrients[1].value, nutrients[2].value);
+                    //need to store foods info in an array 
+                    const foodInfo = {
+                        name: food.description,
+                        protein: nutrients[0].value,
+                        lipids: nutrients[1].value,
+                        carbohydrates: nutrients[2].value,
+                        calories: calories,
+                        measure: measure.disseminationText,
+                        grams: measure.gramWeight,
+                    }
+                    setFoodData(oldArray => [...oldArray, foodInfo]);
+                })
             }
-            setFoodData(oldArray => [...oldArray, foodInfo]);
-
             setReady(false);
-        })})
+            console.log(ready);
+        })
     }
+
+    
 
     return (
         <div>
@@ -114,7 +125,11 @@ export default function SearchFood() {
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-0"> 
                 <div> 
-
+                    {empty &&
+                    <div className="ml-12 mb-6 w-4/5 md:w-3/5 lg:w-4/5"> 
+                        <p> No food found. Please check your spelling and try again. </p>
+                    </div>
+                    }
                     {foodData.length > 0 &&
                     <div className="ml-12 mb-6 w-4/5 md:w-3/5 lg:w-4/5">
                         <div className="overflow-y-scroll h-72 border border-black px-5">
