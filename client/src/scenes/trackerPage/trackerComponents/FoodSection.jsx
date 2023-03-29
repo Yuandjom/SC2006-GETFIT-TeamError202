@@ -39,8 +39,8 @@ export default function FoodSection({name, food, deleteItem}) {
           );
           const updatedFoodExercise = await response.json();
           dispatch(setFoodExercise({ foodexercise: updatedFoodExercise }));
-
-          deleteItem(true);
+            
+          deleteItem((current) => !current);
           
           //setFoodArr(updatedFoodExercise);
     }
