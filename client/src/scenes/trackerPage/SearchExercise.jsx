@@ -10,6 +10,7 @@ export default function SearchExercise() {
     const [input, setInput] = useState("");
     const [exerciseData, setExerciseData] = useState([]);
     const [ready, setReady] = useState(false);
+    const [empty, setEmpty] = useState(false);
     
     const [chosenExercise, setChosenExercise] = useState({});
 
@@ -29,23 +30,23 @@ export default function SearchExercise() {
         setExerciseData([]);
         setChosenExercise({});
         setReady(true);
+        setEmpty(false);
 
-        const {REACT_APP_EXERCISE_API_KEY} = process.env;
-        console.log(REACT_APP_EXERCISE_API_KEY)
-
-        const options = {
-            //mode: 'no-cors',
-            method: 'GET',
+        const response = await fetch(`http://localhost:3001/tracker/searchexercise?input=${input}`, {
+            method: "GET",
             headers: {
-                'x-api-key': REACT_APP_EXERCISE_API_KEY
-            }
-        };
-        
-        const url = 'https://api.api-ninjas.com/v1/caloriesburned?activity=' + input
-            
-        const data = await fetch(url, options)
-        .then(res => res.json())
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await response.json();
 
+        console.log(data);
+
+        if (data.length == 0) {
+            console.log("empty");
+            setEmpty(true);
+        }
+    
         data.map(exercise => {
             const exerciseInfo = {
                 name: exercise.name,
@@ -78,6 +79,11 @@ export default function SearchExercise() {
             <div className="grid grid-cols-1 lg:grid-cols-2"> 
             
                 <div> 
+                    {empty &&
+                    <div className="ml-12 mb-6 w-4/5 md:w-3/5 lg:w-4/5"> 
+                        <p> No exercise found. Please check your spelling and try again. </p>
+                    </div>
+                    }
                     {exerciseData.length > 0 && 
                     <div className="ml-12 mb-6 w-4/5 md:w-3/5 lg:w-4/5">
                         <div className="overflow-y-scroll h-72 border border-black px-5">
