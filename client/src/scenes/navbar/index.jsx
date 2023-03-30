@@ -70,7 +70,6 @@ const Navbar = () => {
             <Button color='inherit' onClick={() => navigate("/home")} >Home</Button>
             <Button color='inherit' onClick={() => navigate("/explore")} >Explore</Button>
             <Button color='inherit' onClick={() => navigate("/tracker")} >Tracker</Button>
-            <Button color='inherit' onClick={() => navigate("/findFriends")} >Find Friends</Button>
             <Button color='inherit' onClick={() => navigate(`/profile/${_id}`)} >Profile</Button>
           </Stack>
           <FormControl variant="standard" value={fullName}>
