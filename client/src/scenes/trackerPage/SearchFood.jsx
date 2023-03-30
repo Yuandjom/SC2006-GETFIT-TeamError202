@@ -71,15 +71,23 @@ export default function SearchFood() {
                     const measuresArr = food.foodMeasures;
         
                     var measure;
-        
-                    //get lowest rank 
-                    var min = Math.min(...measuresArr.map(item => item.rank));
-                    console.log(min);
-        
-                    for (let i=0; i<measuresArr.length; i++) {
-                        if (measuresArr[i].rank === min) {
-                            measure = measuresArr[i];
-                            break;
+
+                    if (measuresArr.length === 0) {
+                        measure = {
+                            disseminationText: "100g",
+                            gramWeight: 100
+                        }
+                    }
+                    else {
+                         //get lowest rank 
+                        var min = Math.min(...measuresArr.map(item => item.rank));
+                        console.log(min);
+            
+                        for (let i=0; i<measuresArr.length; i++) {
+                            if (measuresArr[i].rank === min) {
+                                measure = measuresArr[i];
+                                break;
+                            }
                         }
                     }
         
