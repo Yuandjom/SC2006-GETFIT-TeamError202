@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFoodExercise } from "state";
 import Modal from "./Popup";
@@ -17,6 +17,23 @@ export default function SubmitFood({food}) {
     const [measure, setMeasure] = useState('100g');
 
     const [show, setShow] = useState(false);
+
+    const [constant, setConstant] = useState(0);
+
+    useEffect(() => {
+
+        var multiplyConstant;
+
+        if (measure === '100g') {
+            multiplyConstant = servings;
+        }
+        else {
+            multiplyConstant = servings*(food.grams/100);
+        }
+
+        setConstant(multiplyConstant);
+
+    }, [measure, servings])
 
     //after submit --> post
     const handleSubmit = async () => {
@@ -112,10 +129,10 @@ export default function SubmitFood({food}) {
                 <div className="px-5">
                     <h2 className="mt-3 text-xl text-center"> Nutrients: </h2> 
                     <div className="mt-3">               
-                        <h2> Protein: {food.protein} g </h2>
-                        <h2> Lipids (Fats):  {food.lipids} g </h2>
-                        <h2> Carbohydrates: {food.carbohydrates} g </h2>
-                        <h2> Calories: {food.calories} kcal </h2>
+                        <h2> Protein: {Number(food.protein*constant).toFixed(2)} g </h2>
+                        <h2> Lipids (Fats):  {Number(food.lipids*constant).toFixed(2)} g </h2>
+                        <h2> Carbohydrates: {Number(food.carbohydrates*constant).toFixed(2)} g </h2>
+                        <h2> Calories: {Number(food.calories*constant).toFixed(2)} kcal </h2>
                     </div> 
                     <div className="flex justify-center mt-6">  
                         <button onClick={handleSubmit} className="bg-gray-400 p-3 rounded-xl text-white text-lg"> Add Food </button>
