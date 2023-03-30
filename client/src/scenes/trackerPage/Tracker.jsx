@@ -152,7 +152,7 @@ export default function Tracker() {
           <h2> + </h2>
           <h2> {exerciseCalories} (Exercise) </h2>
           <h2> = </h2>
-          <h2> {remainingCalories} </h2>
+          <h2> {remainingCalories} kcal </h2>
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2">
