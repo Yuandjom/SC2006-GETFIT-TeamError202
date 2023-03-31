@@ -144,7 +144,7 @@ export default function Tracker() {
         </div>
       </div>
       <div className="mt-8 bg-gray-200 mx-10 px-5 py-5 rounded-xl">
-        <h1 className="text-2xl font-bold"> Calories Remaining </h1>
+        <h1 className="text-2xl font-bold"> Calories Counter </h1>
         <div className="flex gap-5 justify-center mt-2">
           <h2> {targetCalories} (Target) </h2>
           <h2> - </h2>

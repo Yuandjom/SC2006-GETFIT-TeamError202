@@ -45,7 +45,7 @@ export default function ExerciseSection({name, exercise, deleteItem}) {
         <div className="mx-10 my-8">
             <div className="grid grid-cols-[2fr_100px_100px_50px]">
                 <h2 className="font-bold text-xl"> {name} </h2>
-                <h2> Duration </h2>
+                <h2> Duration(hrs) </h2>
                 <h2 className="mr-10"> Calories </h2>
             </div>
             
