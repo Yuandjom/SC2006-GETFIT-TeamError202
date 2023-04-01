@@ -25,7 +25,7 @@ const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
-  password: yup.string().required("required"),
+  password: yup.string().required("required"), //edit here for the validation
   location: yup.string().required("required"),
   age: yup.string().required("required"),
   gender: yup.string().required("required"),
@@ -186,15 +186,16 @@ const Form = () => {
                   onChange={handleChange}
                   value={values.height}
                   name="height"
+                  type="number"
                   error={
                     Boolean(touched.height) && Boolean(errors.height)
                   }
                   helperText={touched.height && errors.height}
                   sx={{ gridColumn: "span 2" }}
-                  type="number"
                   InputProps={{
                     inputProps: { 
-                        min: 0
+                        min: 50, 
+                        max: 300
                     }
                   }}
                 />
@@ -210,7 +211,8 @@ const Form = () => {
                   sx={{ gridColumn: "span 2" }}
                   InputProps={{
                     inputProps: { 
-                        min: 0
+                        min: 20, 
+                        max: 500
                     }
                   }}
                 />
@@ -226,7 +228,9 @@ const Form = () => {
                   sx={{ gridColumn: "span 4" }}
                   InputProps={{
                     inputProps: { 
-                        min: 0
+                        type: 'number',
+                        min: 13, 
+                        max: 100
                     }
                   }}
                 />
