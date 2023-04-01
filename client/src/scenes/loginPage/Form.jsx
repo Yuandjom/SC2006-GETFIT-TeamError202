@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
+import Modal from "./PopupRegister";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -65,6 +66,7 @@ const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
+  const [show, setShow] = useState(false);
 
   const register = async (values, onSubmitProps) => {
     // this allows us to send form info with image
@@ -74,18 +76,32 @@ const Form = () => {
     }
     formData.append("picturePath", values.picture.name);
 
-    const savedUserResponse = await fetch(
-      "http://localhost:3001/auth/register",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    const savedUser = await savedUserResponse.json();
-    onSubmitProps.resetForm();
 
-    if (savedUser) {
-      setPageType("login");
+    try{
+      const savedUserResponse = await fetch(
+        "http://localhost:3001/auth/register",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      if(savedUserResponse.status === 500){
+        setShow(true);
+        console.log(savedUserResponse);
+        onSubmitProps.resetForm();
+      }
+      else{
+        console.log(savedUserResponse)
+        const savedUser = await savedUserResponse.json();
+        if (savedUser) {
+          console.log(savedUser)
+          onSubmitProps.resetForm();
+          setPageType("login");
+        }
+      }
+    } catch(error){
+      console.log(error);
+      onSubmitProps.resetForm();
     }
   };
 
@@ -114,6 +130,8 @@ const Form = () => {
   };
 
   return (
+    <>
+
     <Formik
       onSubmit={handleFormSubmit}
       initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
@@ -361,7 +379,14 @@ const Form = () => {
           </Box>
         </form>
       )}
+
     </Formik>
+    <Modal 
+        onClose={() => setShow(false)} 
+        show={show} 
+        name="Food"
+    />
+    </>
   );
 };
 
