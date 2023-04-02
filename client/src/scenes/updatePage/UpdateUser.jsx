@@ -100,40 +100,42 @@ function UpdateUser() {
             <div className="updateTitle">
               EDIT INFORMATION
             </div>
-            <div className="updateElement">
-              <div className="elementTitle">
-                FIRST NAME
+            <div className="mt-12"> 
+              <div className="updateElement">
+                <div className="elementTitle">
+                  FIRST NAME
+                </div>
+                <input className="border border-black rounded-lg p-4 w-8/12 h-12 mr-5" name="firstName" value={user.firstName} onChange={handleChange}></input>
               </div>
-              <input type="updateText" name="firstName" value={user.firstName} onChange={handleChange}></input>
-            </div>
-            <div className="updateElement">
-              <div className="elementTitle">
-                AGE
-              </div>
-              <input type="updateNumber" name="age" value={user.age} onChange={handleChange}></input>
+              <div className="updateElement">
+                <div className="elementTitle">
+                  AGE
+                </div>
+                <input className="border border-black rounded-lg p-4 w-8/12 h-12 mr-5" type="number" name="age" value={user.age} onChange={handleChange}></input>
 
+              </div>
+              <div className="updateElement">
+                <div className="elementTitle">
+                  HEIGHT
+                </div>
+                <div className="flex items-center gap-8 mr-10">
+                  <input className="border border-black rounded-lg p-4 w-4/5 h-12" type="number" name="height" value={user.height} onChange={handleChange}></input>
+                  <h2 className="font-bold"> CM </h2>
+                </div>
+              </div>
+              <div className="updateElement">
+                <div className="elementTitle">
+                  WEIGHT
+                </div> 
+                <div className="flex items-center gap-8 mr-10">
+                  <input className="border border-black rounded-lg p-4 w-4/5 h-12" type="number" name="weight" value={user.weight} onChange={handleChange}></input>
+                  <h2 className="font-bold"> KG </h2>
+                </div>
+              </div>
+              <button className="updateButton" type="submit">
+                UPDATE
+              </button>
             </div>
-            <div className="updateElement">
-              <div className="elementTitle">
-                HEIGHT
-              </div>
-              <div className="inputContainer">
-                <input type="updateNumber" name="height" value={user.height} onChange={handleChange}></input>
-                <span className="inputAdd"> CM </span>
-              </div>
-            </div>
-            <div className="updateElement">
-              <div className="elementTitle">
-                WEIGHT
-              </div>
-              <div className="inputContainer">
-                <input type="updateNumber" name="weight" value={user.weight} onChange={handleChange}></input>
-                <span className="inputAdd"> KG </span>
-              </div>
-            </div>
-            <button className="updateButton" type="submit">
-              UPDATE
-            </button>
           </div>
         </div>
       </form>
