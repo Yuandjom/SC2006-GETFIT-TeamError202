@@ -25,7 +25,7 @@ const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
-  password: yup.string().required("required").min(8, 'Too Short!'), //edit here for the validation
+  password: yup.string().required("required").min(8, 'Enter a valid range between 8-16!').max(16, 'Enter a valid range between 8-16!'), //edit here for the validation
   location: yup.string().required("required"),
   age: yup.number().required("required").min(13, 'Must be 13 and above').max(100, 'Are you sure?'),
   gender: yup.string().required("required"),
@@ -37,7 +37,7 @@ const registerSchema = yup.object().shape({
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
-  password: yup.string().required("required").min(8, 'Too Short!'),
+  password: yup.string().required("required").min(8, 'Enter a valid range between 8-16!').max(16, 'Enter a valid range between 8-16!')
 });
 
 const initialValuesRegister = {
@@ -212,7 +212,7 @@ const Form = () => {
                   sx={{ gridColumn: "span 2" }}
                   InputProps={{
                     inputProps: { 
-                        min: 20, 
+                        min: 30, 
                         max: 500
                     }
                   }}
