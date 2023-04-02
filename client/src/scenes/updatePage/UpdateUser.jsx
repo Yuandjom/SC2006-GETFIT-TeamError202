@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 
 
 
+
 function UpdateUser() {
 
   //from your url link the id 
@@ -51,9 +52,22 @@ function UpdateUser() {
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   }
 
+
   // update the user data
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (user.age <= 0) {
+      return;
+    }
+
+    if (user.height < 50 || user.height > 300) {
+      return;
+    }
+
+    if (user.weight < 20 || user.weight > 500) {
+      return;
+    }
+
     console.log(user)
     const response = await fetch(`http://localhost:3001/users/${loggedInUserId}`, {
       // PUT
