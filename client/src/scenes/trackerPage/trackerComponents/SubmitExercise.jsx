@@ -85,12 +85,12 @@ export default function SubmitExercise({exercise}) {
                             min = {1}
                             onChange = {e => setHours(e.target.value)}
                             />
-                            <p className="text-sm text-center"> hours </p>
+                            <p className="text-sm text-center"> hour(s) </p>
                         </div>
                     </div>
                     <div className="px-5">
                         <h2 className="mt-3 text-xl text-center"> Calories burned: </h2> 
-                        <h2 className="text-center"> {exercise.calories*hours} </h2>
+                        <h2 className="text-center"> {exercise.calories*hours} kcal </h2>
                         <div className="flex justify-center mt-6">  
                             <button onClick={handleSubmit} className="bg-gray-400 p-3 rounded-xl text-white text-lg"> Add Exercise </button>
                         </div> 
