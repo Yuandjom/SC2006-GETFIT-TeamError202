@@ -84,7 +84,7 @@ export default function SubmitFood({food}) {
             <Modal 
                 onClose={() => setShow(false)} 
                 show={show} 
-                name="Food"
+                description="Food added!"
             />
             <div className="ml-12 mb-10 bg-white h-72 w-4/5 md:w-3/5 lg:w-4/5 border border-black p-5 flex flex-col items-center rounded-xl">
             <h2 className="text-xl font-bold"> {food.name} </h2>
