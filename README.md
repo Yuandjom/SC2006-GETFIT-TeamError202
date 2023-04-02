@@ -44,7 +44,7 @@ npm start
 
 Afterwards use 
 Email: testing123@gmail.com
-Password: testing123@gmail.com
+Password: 12345678
 
 if this email and password cant be used, please register a new account
 
