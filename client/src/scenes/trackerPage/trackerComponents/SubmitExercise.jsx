@@ -17,16 +17,23 @@ export default function SubmitExercise({exercise}) {
     const [show, setShow] = useState(false);
 
     const [hours,setHours] = useState(1);
+    const [description, setDescription] = useState("");
 
     //after submit --> post
     const handleSubmit = async () => {
+
+        if (hours < 1) {
+            setDescription("Number of hours need to be larger than 0!");
+            setShow(true);
+            return;
+        }
 
         var finalCalories;
         
         //get calories for exercise
         finalCalories = hours*exercise.calories;
 
-        console.log(finalCalories);
+        //console.log(finalCalories);
 
         //create data to be passed in 
         
@@ -52,6 +59,7 @@ export default function SubmitExercise({exercise}) {
 
         dispatch(setFoodExercise({foodexercise: updatedFoodExercise}));
 
+        setDescription("Exercise added!");
         setShow(true);
     }
 
@@ -60,7 +68,7 @@ export default function SubmitExercise({exercise}) {
             <Modal 
                 onClose={() => setShow(false)} 
                 show={show} 
-                name="Exercise"
+                description={description}
             />
             <div className="ml-12 mb-10 bg-white h-60 w-4/5 md:w-3/5 lg:w-4/5 border border-black p-5 flex flex-col items-center rounded-xl">
                 <h2 className="text-xl font-bold"> {exercise.name} </h2>
