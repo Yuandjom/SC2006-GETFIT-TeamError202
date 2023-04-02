@@ -23,7 +23,7 @@ export default function SubmitExercise({exercise}) {
     const handleSubmit = async () => {
 
         if (hours < 1) {
-            setDescription("Number of hours need to be larger than 0!");
+            setDescription("Number of hours needs to be larger than 0!");
             setShow(true);
             return;
         }

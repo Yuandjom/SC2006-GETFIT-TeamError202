@@ -51,7 +51,7 @@ export default function FoodSection({name, food, deleteItem}) {
                 <h2 className="font-bold text-xl"> {name} </h2>
                 <h2 className=""> Serving(s) </h2>
                 <h2 className="ml-2"> Measure  </h2>
-                <h2 className="ml-4"> Calories </h2>
+                <h2 className="ml-4"> Calories(kcal) </h2>
             </div>
             {foodArr.length > 0 &&
             foodArr.map(food =>

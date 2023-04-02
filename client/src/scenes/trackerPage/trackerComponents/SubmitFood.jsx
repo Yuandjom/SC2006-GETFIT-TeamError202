@@ -17,6 +17,7 @@ export default function SubmitFood({food}) {
     const [measure, setMeasure] = useState('100g');
 
     const [show, setShow] = useState(false);
+    const [description, setDescription] = useState("");
 
     const [constant, setConstant] = useState(0);
 
@@ -37,6 +38,12 @@ export default function SubmitFood({food}) {
 
     //after submit --> post
     const handleSubmit = async () => {
+
+        if (servings < 1) {
+            setDescription("Number of servings needs to be larger than 0!");
+            setShow(true);
+            return;
+        }
 
         var finalCalories;
 
@@ -76,6 +83,7 @@ export default function SubmitFood({food}) {
 
         dispatch(setFoodExercise({foodexercise: updatedFoodExercise}));
 
+        setDescription("Food added!");
         setShow(true);
     }
 
@@ -84,7 +92,7 @@ export default function SubmitFood({food}) {
             <Modal 
                 onClose={() => setShow(false)} 
                 show={show} 
-                description="Food added!"
+                description={description}
             />
             <div className="ml-12 mb-10 bg-white h-72 w-4/5 md:w-3/5 lg:w-4/5 border border-black p-5 flex flex-col items-center rounded-xl">
             <h2 className="text-xl font-bold"> {food.name} </h2>
@@ -98,6 +106,7 @@ export default function SubmitFood({food}) {
                         type="number" 
                         placeholder="1.0"
                         value = {servings}
+                        min = {1}
                         onChange = {e => setServings(e.target.value)}
                         />
                         <p className="text-sm text-center"> servings of </p>
