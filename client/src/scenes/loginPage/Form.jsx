@@ -25,19 +25,19 @@ const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
-  password: yup.string().required("required"), //edit here for the validation
+  password: yup.string().required("required").min(8, 'Too Short!'), //edit here for the validation
   location: yup.string().required("required"),
-  age: yup.string().required("required"),
+  age: yup.number().required("required").min(13, 'Must be 13 and above').max(100, 'Are you sure?'),
   gender: yup.string().required("required"),
-  height: yup.string().required("required"),
-  weight: yup.string().required("required"),
+  height: yup.number().required("required").min(50, 'Enter a valid range between 50-300 cm').max(300, 'Enter a valid range between 50-300 cm'),
+  weight: yup.number().required("required").min(30, 'Enter a valid range between 30-500 kg').max(500, 'Enter a valid range between 30-500 kg'),
   fitnessPlan: yup.string().required("required"),
   picture: yup.string().required("required"),
 });
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
-  password: yup.string().required("required"),
+  password: yup.string().required("required").min(8, 'Too Short!'),
 });
 
 const initialValuesRegister = {
