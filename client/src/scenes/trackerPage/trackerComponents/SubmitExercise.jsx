@@ -74,6 +74,7 @@ export default function SubmitExercise({exercise}) {
                             type="number" 
                             placeholder="1.0"
                             value = {hours}
+                            min = {1}
                             onChange = {e => setHours(e.target.value)}
                             />
                             <p className="text-sm text-center"> hours </p>
