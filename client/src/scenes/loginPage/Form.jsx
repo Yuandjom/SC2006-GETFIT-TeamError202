@@ -111,6 +111,9 @@ const Form = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
+    if (loggedInResponse.status == 400){
+      alert("Invalid login")
+    }
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
     if (loggedIn) {
@@ -121,8 +124,6 @@ const Form = () => {
         })
       );
       navigate("/home");
-    }else{
-      alert("Invalid Login");
     }
 
   };
