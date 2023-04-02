@@ -121,8 +121,10 @@ const Form = () => {
         })
       );
       navigate("/home");
+    }else{
+      alert("Invalid Login");
     }
-    alert("Invalid Login");
+
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
