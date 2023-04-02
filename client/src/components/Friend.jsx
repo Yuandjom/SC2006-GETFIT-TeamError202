@@ -5,8 +5,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { setFriends } from "state";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
-
+import Modal from "./PopupFriend";
+import { useState } from "react";
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
@@ -41,11 +43,18 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
       }
     );
     const data = await response.json();
+    setShow(true);
     dispatch(setFriends({ friends: data }));
   };
   
   return (
-    <FlexBetween>
+    <>
+      <Modal 
+        onClose={() => setShow(false)} 
+        show={show} 
+        friendOrNot = {isFriend}
+      />
+     <FlexBetween>
       <FlexBetween gap="1rem">
         <UserImage image={userPicturePath} size="30px" />
         <Box
@@ -82,7 +91,12 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
           <PersonAddOutlined sx={{ color: primaryDark }} />
         )}
       </IconButton>) : <></>}
+
     </FlexBetween>
+    
+    </>
+   
+    
   );
 };
 
