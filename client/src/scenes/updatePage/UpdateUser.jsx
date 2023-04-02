@@ -57,14 +57,17 @@ function UpdateUser() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (user.age <= 0) {
+      alert("Invalid Age!")
       return;
     }
 
     if (user.height < 50 || user.height > 300) {
+      alert("Invaid Height! Please enter height between 50cm to 300cm!")
       return;
     }
 
     if (user.weight < 20 || user.weight > 500) {
+      alert("Invaid Weight! Please enter weight between 20kg to 500kg!")
       return;
     }
 
@@ -100,7 +103,7 @@ function UpdateUser() {
             <div className="updateTitle">
               EDIT INFORMATION
             </div>
-            <div className="mt-12"> 
+            <div className="mt-12">
               <div className="updateElement">
                 <div className="elementTitle">
                   FIRST NAME
@@ -126,7 +129,7 @@ function UpdateUser() {
               <div className="updateElement">
                 <div className="elementTitle">
                   WEIGHT
-                </div> 
+                </div>
                 <div className="flex items-center gap-8 mr-10">
                   <input className="border border-black rounded-lg p-4 w-4/5 h-12" type="number" name="weight" value={user.weight} onChange={handleChange}></input>
                   <h2 className="font-bold"> KG </h2>
