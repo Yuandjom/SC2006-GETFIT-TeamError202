@@ -61,6 +61,9 @@ Project is created with:
 - Javascript
 - React version: 18.2.0
 - Material UI V5
+- MongoDB
+- Express
+- NodeJS
 
 ## Contributors[![](./README_docsAndimages/pin.svg)](#contributors)
 
