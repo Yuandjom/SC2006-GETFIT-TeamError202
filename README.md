@@ -13,8 +13,6 @@ Website link:
 ## Getting started
 Add .env file in client and server
 
-(to be added)
-
 Open two terminals in the command line
 ```
 ../cd client 
