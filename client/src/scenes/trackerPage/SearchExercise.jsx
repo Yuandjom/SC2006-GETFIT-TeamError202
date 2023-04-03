@@ -4,6 +4,7 @@ import fetch from "node-fetch";
 import { useState } from "react";
 import Spinner from "../../components/Spinner";
 import SubmitExercise from "./trackerComponents/SubmitExercise";
+import Modal from "./trackerComponents/Popup";
 
 export default function SearchExercise() {
 
@@ -13,6 +14,8 @@ export default function SearchExercise() {
     const [empty, setEmpty] = useState(false);
     
     const [chosenExercise, setChosenExercise] = useState({});
+    const [description, setDescription] = useState("");
+    const [show, setShow] = useState(false);
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -26,6 +29,12 @@ export default function SearchExercise() {
     //call the api
     const Search = async (e) => {
         e.preventDefault();
+
+        if (input === "") {
+            setDescription("Search input cannot be empty!");
+            setShow(true);
+            return;
+        }
 
         setExerciseData([]);
         setChosenExercise({});
@@ -62,6 +71,11 @@ export default function SearchExercise() {
         <div>
             <Navbar />
             {(ready) && <Spinner />}
+            <Modal 
+                onClose={() => setShow(false)} 
+                show={show} 
+                description={description}
+            />
             <div className="mt-10 ml-10 mb-5 flex gap-4">
                 <input 
                 className="px-4 h-12 w-4/5 md:w-3/5 lg:w-2/5"
