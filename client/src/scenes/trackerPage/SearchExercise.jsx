@@ -33,6 +33,7 @@ export default function SearchExercise() {
         if (input === "") {
             setDescription("Search input cannot be empty!");
             setShow(true);
+            setExerciseData([]);
             return;
         }
 
