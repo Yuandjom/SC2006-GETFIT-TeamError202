@@ -12,7 +12,14 @@ Website link:
 - [Contributors](#contributors)
 
 ## Getting started
-Add .env file in client and server
+Please obtain the api keys from the following websites:
+Calories burned: https://api-ninjas.com/
+Calories gain: https://fdc.nal.usda.gov/api-guide.html
+
+Add .env file in client and server and add the api keys into the .env files:
+1. Declare the Calories burned API key as REACT_APP_FOOD_API_KEY in the client 
+2. Declare the Calories gain API key as EXERCISE_API_KEY in the server
+
 
 Open two terminals in the command line
 ```
@@ -55,16 +62,14 @@ GetFit recognizes that getting fit involves more than just physical exercise. It
 Moreover, GetFit acknowledges that exercising alone can be tedious, which is why it has a social media feature that connects users with like-minded individuals. Furthermore, users can share their workout or meal preparation by uploading posts, motivating and inspiring others. 
 Overall, GetFit is a one-stop platform that streamlines and elevates one’s fitness journey, which can often be daunting. With its well thought out features, GetFit aims to make fitness accessible and enjoyable for people of all ages. 
 
+
 ## Key features[![](./README_docsAndimages/pin.svg)](#key-features)
-• **Social Media**: Users can create, edit, and view their profiles. They can create posts with captions and images to document and share their fitness journey with everyone. Through their journey, GetFit provides users with a functionality to connect with other users as friends!
 
-• **Explore Nearby Fitness Facilities**: Users can find the closest Fitness facilities based on their location.
-
-• **Tracker**: Users can work towards a target calorie count for the day to help them stick to their fitness plan. The user can record their calorie intake by selecting the foods eaten throughout the day as well as record the calories burnt by recording the exercises they performed during the day.
 
 ## Technologies[![](./README_docsAndimages/pin.svg)](#technologies)
 
 Project is created with:
+
 - HTML
 - CSS
 - Javascript
