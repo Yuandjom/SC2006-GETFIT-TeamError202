@@ -4,11 +4,20 @@
 
 ## Table of contents
 
-- [Getting started](#Getting-started)
 - [Introduction](#introduction)
+- [Getting started](#Getting-started)
 - [Key features](#key-features)
 - [Technologies](#technologies)
 - [Contributors](#contributors)
+
+## Introduction[![](./README_docsAndimages/pin.svg)](#introduction)
+
+The purpose of GetFit is to assist individuals in kick starting their fitness journey, particularly those who are unsure of where to begin. GetFit is a web page that displays nearby fitness facilities that cater to user’s needs and preferences, all at the user’s convenience.
+
+GetFit recognizes that getting fit involves more than just physical exercise. It has an in-build calorie tracker that enables users to monitor their calorie intake. In addition, they can input their workout to track their calories output. By providing users with a comprehensive view of their fitness journey, GetFit aims to offer a holistic approach to healthy living.
+
+Moreover, GetFit acknowledges that exercising alone can be tedious, which is why it has a social media feature that connects users with like-minded individuals. Furthermore, users can share their workout or meal preparation by uploading posts, motivating and inspiring others.
+Overall, GetFit is a one-stop platform that streamlines and elevates one’s fitness journey, which can often be daunting. With its well thought out features, GetFit aims to make fitness accessible and enjoyable for people of all ages.
 
 ## Getting started
 
@@ -68,15 +77,6 @@ Afterwards use
 - Password: 12345678
 
 If this email and password cant be used, please register a new account
-
-## Introduction[![](./README_docsAndimages/pin.svg)](#introduction)
-
-The purpose of GetFit is to assist individuals in kick starting their fitness journey, particularly those who are unsure of where to begin. GetFit is a web page that displays nearby fitness facilities that cater to user’s needs and preferences, all at the user’s convenience.
-
-GetFit recognizes that getting fit involves more than just physical exercise. It has an in-build calorie tracker that enables users to monitor their calorie intake. In addition, they can input their workout to track their calories output. By providing users with a comprehensive view of their fitness journey, GetFit aims to offer a holistic approach to healthy living.
-
-Moreover, GetFit acknowledges that exercising alone can be tedious, which is why it has a social media feature that connects users with like-minded individuals. Furthermore, users can share their workout or meal preparation by uploading posts, motivating and inspiring others.
-Overall, GetFit is a one-stop platform that streamlines and elevates one’s fitness journey, which can often be daunting. With its well thought out features, GetFit aims to make fitness accessible and enjoyable for people of all ages.
 
 ## Key features[![](./README_docsAndimages/pin.svg)](#key-features)
 
