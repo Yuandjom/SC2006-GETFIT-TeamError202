@@ -56,8 +56,13 @@ function UpdateUser() {
   // update the user data
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (user.age <= 0) {
+    if (user.age < 13) {
       alert("Invalid Age!")
+      return;
+    }
+
+    if (user.age > 100){
+      alert("Are you sure?")
       return;
     }
 
