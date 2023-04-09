@@ -13,7 +13,9 @@ Website link:
 
 ## Getting started
 Please obtain the api keys from the following websites:
+
 Calories burned: https://api-ninjas.com/
+
 Calories gain: https://fdc.nal.usda.gov/api-guide.html
 
 Add .env file in client and server and add the api keys into the .env files:
