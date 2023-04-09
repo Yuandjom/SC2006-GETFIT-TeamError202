@@ -56,11 +56,11 @@ Moreover, GetFit acknowledges that exercising alone can be tedious, which is why
 Overall, GetFit is a one-stop platform that streamlines and elevates one’s fitness journey, which can often be daunting. With its well thought out features, GetFit aims to make fitness accessible and enjoyable for people of all ages. 
 
 ## Key features[![](./README_docsAndimages/pin.svg)](#key-features)
-• Social Media: Users can create, edit, and view their profiles. They can create posts with captions and images to document and share their fitness journey with everyone. Through their journey, GetFit provides users with a functionality to connect with other users as friends!
+• **Social Media**: Users can create, edit, and view their profiles. They can create posts with captions and images to document and share their fitness journey with everyone. Through their journey, GetFit provides users with a functionality to connect with other users as friends!
 
-• Explore Nearby Fitness Facilities: Users can find the closest Fitness facilities based on their location.
+• **Explore Nearby Fitness Facilities**: Users can find the closest Fitness facilities based on their location.
 
-• Tracker: Users can work towards a target calorie count for the day to help them stick to their fitness plan. The user can record their calorie intake by selecting the foods eaten throughout the day as well as record the calories burnt by recording the exercises they performed during the day.
+• **Tracker**: Users can work towards a target calorie count for the day to help them stick to their fitness plan. The user can record their calorie intake by selecting the foods eaten throughout the day as well as record the calories burnt by recording the exercises they performed during the day.
 
 ## Technologies[![](./README_docsAndimages/pin.svg)](#technologies)
 
