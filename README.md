@@ -66,6 +66,7 @@ Overall, GetFit is a one-stop platform that streamlines and elevates one’s fit
 
 
 ## Key features[![](./README_docsAndimages/pin.svg)](#key-features)
+• **Social Media** :
 
 
 ## Technologies[![](./README_docsAndimages/pin.svg)](#technologies)
