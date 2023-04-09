@@ -23,7 +23,8 @@ Calories gain: https://fdc.nal.usda.gov/api-guide.html
 Add .env file in client and server and add the api keys into the .env files:
 
 1. Declare the Calories burned API key as REACT_APP_FOOD_API_KEY in the client
-2. Declare the Calories gain API key as EXERCISE_API_KEY in the server
+2. Declare the Calories burned API key as REACT_APP_GOOGLE_API_KEY in the client
+3. Declare the Calories gain API key as EXERCISE_API_KEY in the server
 
 Open two terminals in the command line
 
@@ -78,6 +79,7 @@ Moreover, GetFit acknowledges that exercising alone can be tedious, which is why
 Overall, GetFit is a one-stop platform that streamlines and elevates one’s fitness journey, which can often be daunting. With its well thought out features, GetFit aims to make fitness accessible and enjoyable for people of all ages.
 
 ## Key features[![](./README_docsAndimages/pin.svg)](#key-features)
+
 • **Social Media** :
 
 ## Technologies[![](./README_docsAndimages/pin.svg)](#technologies)
