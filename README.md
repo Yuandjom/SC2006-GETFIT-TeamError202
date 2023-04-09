@@ -82,11 +82,21 @@ If this email and password cant be used, please register a new account
 
 • **Social Media** : Users can create, view, and edit their profiles. They can share create posts with captions and images to document and share their fitness journey. GetFit also allows users to connect with like-minded users by adding them as friends!
 
+
+![image](https://user-images.githubusercontent.com/69751989/230755874-45298152-7d17-4a8b-b728-068074f83253.png)
+
+
 • **Explore Nearby Fitness Facilities** : Users can explore and search for fitness facilities near them to get started on their fitness journey!
+
 
 ![image](https://user-images.githubusercontent.com/69751989/230755838-51713c10-16e8-4858-9ffd-9ed969032ce7.png)
 
+
 • **Tracker** : On track to achieving their fitness goals, users are given target calories and can keep track of their calorie records for each day by recording their calorie intake or foods taken throughout the day and the calories burnt or exercise.
+
+
+![image](https://user-images.githubusercontent.com/69751989/230755888-6816856b-9d6d-4a65-8216-b8f57a06ed64.png)
+
 
 ## Technologies[![](./README_docsAndimages/pin.svg)](#technologies)
 
