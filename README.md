@@ -78,6 +78,7 @@ Moreover, GetFit acknowledges that exercising alone can be tedious, which is why
 Overall, GetFit is a one-stop platform that streamlines and elevates one’s fitness journey, which can often be daunting. With its well thought out features, GetFit aims to make fitness accessible and enjoyable for people of all ages.
 
 ## Key features[![](./README_docsAndimages/pin.svg)](#key-features)
+• **Social Media** :
 
 ## Technologies[![](./README_docsAndimages/pin.svg)](#technologies)
 
