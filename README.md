@@ -32,7 +32,7 @@ Calories gain: https://fdc.nal.usda.gov/api-guide.html
 Add .env file in client and server and add the api keys into the .env files:
 
 1. Declare the Calories burned API key as REACT_APP_FOOD_API_KEY in the client
-2. Declare the Calories burned API key as REACT_APP_GOOGLE_API_KEY in the client
+2. Declare the Google Maps API key as REACT_APP_GOOGLE_API_KEY in the client
 3. Declare the Calories gain API key as EXERCISE_API_KEY in the server
 
 Open two terminals in the command line
@@ -79,11 +79,12 @@ Afterwards use
 If this email and password cant be used, please register a new account
 
 ## Key features[![](./README_docsAndimages/pin.svg)](#key-features)
+
 • **Social Media** : Users can create, view, and edit their profiles. They can share create posts with captions and images to document and share their fitness journey. GetFit also allows users to connect with like-minded users by adding them as friends!
 
 • **Explore Nearby Fitness Facilities** : Users can explore and search for fitness facilities near them to get started on their fitness journey!
 
-• **Tracker** : On track to achieving their fitness goals, users are given target calories and can keep track of their calorie records for each day by recording their calorie intake or foods taken throughout the day and the calories burnt or exercise. 
+• **Tracker** : On track to achieving their fitness goals, users are given target calories and can keep track of their calorie records for each day by recording their calorie intake or foods taken throughout the day and the calories burnt or exercise.
 
 ## Technologies[![](./README_docsAndimages/pin.svg)](#technologies)
 
